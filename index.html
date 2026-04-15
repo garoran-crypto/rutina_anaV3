@@ -1,151 +1,152 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rutina de Ana v4</title>
-  <style>
-    * { box-sizing: border-box; }
-    body { margin: 0; font-family: Arial, sans-serif; background: #fff7fb; color: #4a2a3a; }
-    .app { max-width: 430px; margin: 0 auto; min-height: 100vh; background: linear-gradient(180deg, #fffafc 0%, #fff1f7 100%); }
-    .screen { display: none; min-height: 100vh; padding: 20px 16px 96px; }
-    .screen.active { display: block; }
-    h1, h2, h3 { margin: 0 0 14px; line-height: 1.2; }
-    h1, h2 { text-align: center; color: #a03d72; }
-    h1 { font-size: 28px; } h2 { font-size: 24px; } h3 { font-size: 20px; color: #7b3258; }
-    p { line-height: 1.45; }
-    .card, .exercise-card, .history-card, .popup-box {
-      background: #fff; border-radius: 20px; box-shadow: 0 10px 28px rgba(160,61,114,.12);
-      border: 1px solid #f6d7e5; padding: 16px; margin-bottom: 16px;
-    }
-    .subtitle { text-align: center; color: #8a5870; margin-bottom: 18px; }
-    .button-grid, .day-grid { display: grid; gap: 12px; margin-top: 20px; }
-    .day-grid { grid-template-columns: 1fr 1fr; }
-    button { width: 100%; border: none; border-radius: 16px; padding: 14px 12px; font-size: 15px; font-weight: 700; cursor: pointer; }
-    .primary-btn { background: #c0558b; color: #fff; } .secondary-btn { background: #8b5cf6; color: #fff; }
-    .light-btn { background: #f8dce9; color: #7b3258; } .accent-btn { background: #ec4899; color: #fff; }
-    .alt-btn { background: #f59e0b; color: #fff; } .success-btn { background: #10b981; color: #fff; } .danger-btn { background: #ef4444; color: #fff; }
-    .exercise-image { width: 100%; border-radius: 16px; margin: 12px 0; display: block; background: #fff8fb; }
-    .exercise-desc { color: #7a5b6a; margin-bottom: 8px; } .exercise-meta { color: #9a6c82; font-size: 14px; margin-bottom: 8px; }
-    .howto { background: #fff5fa; border: 1px solid #f6d7e5; border-radius: 14px; padding: 10px 12px; font-size: 14px; color: #7b3258; margin-bottom: 14px; }
-    .chip { display: inline-block; background: #fde7f1; color: #a03d72; padding: 6px 10px; border-radius: 999px; font-size: 12px; margin-right: 6px; margin-bottom: 8px; }
-    .field { margin-bottom: 10px; } .field label { display: block; font-size: 13px; color: #8a5870; margin-bottom: 6px; font-weight: 700; }
-    input[type=text], input[type=number], textarea, select {
-      width: 100%; border: 1px solid #efbdd3; border-radius: 10px; padding: 10px; font-size: 14px; color: #5c3047; background: #fffafd;
-    }
-    textarea { min-height: 82px; resize: vertical; }
-    .editor-block { border: 1px solid #f6d7e5; border-radius: 16px; padding: 12px; margin-bottom: 14px; background: #fffafd; }
-    .small-note { background: #fff2f8; color: #8a5870; border-radius: 14px; padding: 12px; margin-top: 14px; font-size: 14px; }
-    .screen-actions {
-      position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
-      width: min(430px, 100%); background: rgba(255,250,252,.96);
-      backdrop-filter: blur(8px); border-top: 1px solid #f6d7e5;
-      display: flex; gap: 10px; padding: 12px 16px; z-index: 30;
-    }
-    .popup-overlay { position: fixed; inset: 0; background: rgba(90,35,62,.58); display: none; align-items: center; justify-content: center; padding: 16px; z-index: 100; }
-    .popup-overlay.active { display: flex; }
-    .popup-box { width: 100%; max-width: 420px; max-height: 90vh; overflow: auto; }
-    table { width: 100%; border-collapse: collapse; margin: 12px 0 16px; font-size: 14px; }
-    th, td { border: 1px solid #f2c5da; padding: 8px; text-align: center; vertical-align: middle; }
-    th { background: #fff0f7; color: #7b3258; }
-    .empty-box { background: #fff8fb; border: 1px dashed #efbdd3; border-radius: 16px; padding: 18px; text-align: center; color: #8a5870; margin-top: 16px; }
-    iframe { width: 100%; height: 68vh; border: 0; border-radius: 16px; background: #fff; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rutina de Ana v4 corregida</title>
+<style>
+* { box-sizing:border-box; }
+body { margin:0; font-family:Arial,sans-serif; background:#fff7fb; color:#4a2a3a; }
+.app { max-width:430px; margin:0 auto; min-height:100vh; background:linear-gradient(180deg,#fffafc 0%,#fff1f7 100%); }
+.screen { display:none; min-height:100vh; padding:20px 16px 96px; }
+.screen.active { display:block; }
+h1,h2,h3 { margin:0 0 14px; line-height:1.2; }
+h1,h2 { text-align:center; color:#a03d72; }
+h1 { font-size:28px; } h2 { font-size:24px; } h3 { font-size:20px; color:#7b3258; }
+p { line-height:1.45; }
+.card,.exercise-card,.history-card,.popup-box { background:#fff; border-radius:20px; box-shadow:0 10px 28px rgba(160,61,114,.12); border:1px solid #f6d7e5; padding:16px; margin-bottom:16px; }
+.subtitle { text-align:center; color:#8a5870; margin-bottom:18px; }
+.button-grid,.day-grid { display:grid; gap:12px; margin-top:20px; }
+.day-grid { grid-template-columns:1fr 1fr; }
+button { width:100%; border:none; border-radius:16px; padding:14px 12px; font-size:15px; font-weight:700; cursor:pointer; }
+.primary-btn { background:#c0558b; color:#fff; } .secondary-btn { background:#8b5cf6; color:#fff; }
+.light-btn { background:#f8dce9; color:#7b3258; } .accent-btn { background:#ec4899; color:#fff; }
+.alt-btn { background:#f59e0b; color:#fff; } .success-btn { background:#10b981; color:#fff; } .danger-btn { background:#ef4444; color:#fff; }
+.exercise-image { width:100%; border-radius:16px; margin:12px 0; display:block; background:#fff8fb; }
+.exercise-desc { color:#7a5b6a; margin-bottom:8px; } .exercise-meta { color:#9a6c82; font-size:14px; margin-bottom:8px; }
+.howto { background:#fff5fa; border:1px solid #f6d7e5; border-radius:14px; padding:10px 12px; font-size:14px; color:#7b3258; margin-bottom:14px; }
+.chip { display:inline-block; background:#fde7f1; color:#a03d72; padding:6px 10px; border-radius:999px; font-size:12px; margin-right:6px; margin-bottom:8px; }
+.field { margin-bottom:10px; } .field label { display:block; font-size:13px; color:#8a5870; margin-bottom:6px; font-weight:700; }
+input[type=text],input[type=number],textarea,select { width:100%; border:1px solid #efbdd3; border-radius:10px; padding:10px; font-size:14px; color:#5c3047; background:#fffafd; }
+textarea { min-height:82px; resize:vertical; }
+.editor-block { border:1px solid #f6d7e5; border-radius:16px; padding:12px; margin-bottom:14px; background:#fffafd; }
+.small-note { background:#fff2f8; color:#8a5870; border-radius:14px; padding:12px; margin-top:14px; font-size:14px; }
+.screen-actions { position:fixed; bottom:0; left:50%; transform:translateX(-50%); width:min(430px,100%); background:rgba(255,250,252,.96); backdrop-filter:blur(8px); border-top:1px solid #f6d7e5; display:flex; gap:10px; padding:12px 16px; z-index:30; }
+.popup-overlay { position:fixed; inset:0; background:rgba(90,35,62,.58); display:none; align-items:center; justify-content:center; padding:16px; z-index:100; }
+.popup-overlay.active { display:flex; }
+.popup-box { width:100%; max-width:420px; max-height:90vh; overflow:auto; }
+table { width:100%; border-collapse:collapse; margin:12px 0 16px; font-size:14px; }
+th,td { border:1px solid #f2c5da; padding:8px; text-align:center; vertical-align:middle; }
+th { background:#fff0f7; color:#7b3258; }
+.empty-box { background:#fff8fb; border:1px dashed #efbdd3; border-radius:16px; padding:18px; text-align:center; color:#8a5870; margin-top:16px; }
+.table-wrap { overflow-x:auto; border:1px solid #f2c5da; border-radius:16px; background:#fff; }
+iframe { width:100%; height:68vh; border:0; border-radius:16px; background:#fff; }
+</style>
 </head>
 <body>
 <div class="app">
-  <section id="screen-home" class="screen active">
-    <h1>Rutina de Ana</h1>
-    <p class="subtitle">Pulsa sobre la imagen para entrar en la app</p>
-    <div class="card">
-      <p>Incluye los 4 días completos, enlaces editables y botón para añadir ejercicios nuevos.</p>
-      <img class="exercise-image" alt="Portada rutina" onclick="showScreen('screen-menu')"
-        src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 450'%3E%3Crect width='800' height='450' rx='30' fill='%23ffe7f2'/%3E%3Ctext x='90' y='150' font-size='52' font-family='Arial' font-weight='700' fill='%237b3258'%3ERutina de Ana%3C/text%3E%3Ctext x='90' y='230' font-size='32' font-family='Arial' fill='%235c3047'%3EToca para entrar%3C/text%3E%3Ccircle cx='650' cy='160' r='50' fill='%23f5c9a9'/%3E%3Crect x='610' y='220' width='80' height='110' rx='30' fill='%23ec4899'/%3E%3C/svg%3E">
-      <div class="small-note">Los ejercicios sin enlace ya quedan preparados para que se lo pongas en modo edición.</div>
-    </div>
-    <div class="screen-actions"><button class="light-btn" onclick="goHome()">Inicio</button></div>
-  </section>
+<section id="screen-home" class="screen active">
+  <h1>Rutina de Ana</h1>
+  <p class="subtitle">Pulsa sobre la imagen para entrar en la app</p>
+  <div class="card">
+    <p>Rutina de 4 días para potenciarte al máximo</p>
+    <img class="exercise-image" alt="Portada rutina" id="homeImage"
+      src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 450'%3E%3Crect width='800' height='450' rx='30' fill='%23ffe7f2'/%3E%3Ctext x='90' y='150' font-size='52' font-family='Arial' font-weight='700' fill='%237b3258'%3ERutina de Ana%3C/text%3E%3Ctext x='90' y='230' font-size='32' font-family='Arial' fill='%235c3047'%3EToca para entrar%3C/text%3E%3Ccircle cx='650' cy='160' r='50' fill='%23f5c9a9'/%3E%3Crect x='610' y='220' width='80' height='110' rx='30' fill='%23ec4899'/%3E%3C/svg%3E">
+    <div class="small-note">Vamossssss ANA tu puedes con esto y con más.</div>
+  </div>
+  <div class="screen-actions"><button class="light-btn" onclick="goHome()">Inicio</button></div>
+</section>
 
-  <section id="screen-menu" class="screen">
-    <h2>Menú principal</h2>
-    <p class="subtitle">Selecciona la sección a la que quieres entrar</p>
-    <div class="button-grid">
-      <button class="primary-btn" onclick="showScreen('screen-rutina')">Rutina</button>
-      <button class="secondary-btn" onclick="renderHistory(); showScreen('screen-historico')">Historico</button>
-      <button class="alt-btn" onclick="openEditor()">Editar rutina</button>
-    </div>
-    <div class="screen-actions">
-      <button class="light-btn" onclick="goBack()">Volver</button>
-      <button class="accent-btn" onclick="goHome()">Inicio</button>
-    </div>
-  </section>
+<section id="screen-menu" class="screen">
+  <h2>Menú principal</h2>
+  <p class="subtitle">Selecciona la sección a la que quieres entrar</p>
+  <div class="button-grid">
+    <button class="primary-btn" onclick="showScreen('screen-rutina')">Rutina</button>
+    <button class="secondary-btn" onclick="renderHistory(); showScreen('screen-historico')">Historico</button>
+    <button class="alt-btn" onclick="openEditor()">Editar rutina</button>
+    <button class="primary-btn" onclick="showScreen('screen-medidas')">Medidas</button>
+  </div>
+  <div class="screen-actions"><button class="light-btn" onclick="goBack()">Volver</button><button class="accent-btn" onclick="goHome()">Inicio</button></div>
+</section>
 
-  <section id="screen-rutina" class="screen">
-    <h2>Rutina</h2>
-    <p class="subtitle">Escoge el día que quieres consultar</p>
-    <div class="day-grid">
-      <button class="primary-btn" onclick="openDay(1)">Día 1</button>
-      <button class="primary-btn" onclick="openDay(2)">Día 2</button>
-      <button class="primary-btn" onclick="openDay(3)">Día 3</button>
-      <button class="primary-btn" onclick="openDay(4)">Día 4</button>
-    </div>
-    <div class="screen-actions">
-      <button class="light-btn" onclick="goBack()">Volver</button>
-      <button class="accent-btn" onclick="goHome()">Inicio</button>
-    </div>
-  </section>
+<section id="screen-rutina" class="screen">
+  <h2>Rutina</h2>
+  <p class="subtitle">Escoge el día que quieres consultar</p>
+  <div class="day-grid">
+    <button class="primary-btn" onclick="openDay(1)">Día 1</button>
+    <button class="primary-btn" onclick="openDay(2)">Día 2</button>
+    <button class="primary-btn" onclick="openDay(3)">Día 3</button>
+    <button class="primary-btn" onclick="openDay(4)">Día 4</button>
+  </div>
+  <div class="screen-actions"><button class="light-btn" onclick="goBack()">Volver</button><button class="accent-btn" onclick="goHome()">Inicio</button></div>
+</section>
 
-  <section id="screen-day-detail" class="screen">
-    <h2 id="day-title">Día 1</h2>
-    <p class="subtitle">Listado de ejercicios del día seleccionado</p>
-    <div id="exercise-list"></div>
-    <div class="screen-actions">
-      <button class="light-btn" onclick="goBack()">Volver</button>
-      <button class="accent-btn" onclick="goHome()">Inicio</button>
-    </div>
-  </section>
+<section id="screen-day-detail" class="screen">
+  <h2 id="day-title">Día 1</h2>
+  <p class="subtitle">Listado de ejercicios del día seleccionado</p>
+  <div id="exercise-list"></div>
+  <div class="screen-actions"><button class="light-btn" onclick="goBack()">Volver</button><button class="accent-btn" onclick="goHome()">Inicio</button></div>
+</section>
 
-  <section id="screen-historico" class="screen">
-    <h2>Historico</h2>
-    <p class="subtitle">Aquí verás todos los registros guardados</p>
-    <div id="history-list"></div>
-    <div class="screen-actions">
-      <button class="light-btn" onclick="goBack()">Volver</button>
-      <button class="accent-btn" onclick="goHome()">Inicio</button>
-    </div>
-  </section>
+<section id="screen-historico" class="screen">
+  <h2>Historico</h2>
+  <p class="subtitle">Aquí verás todos los registros guardados</p>
+  <div id="history-list"></div>
+  <div class="screen-actions"><button class="light-btn" onclick="goBack()">Volver</button><button class="accent-btn" onclick="goHome()">Inicio</button></div>
+</section>
 
-  <section id="screen-editor" class="screen">
-    <h2>Editar rutina</h2>
-    <p class="subtitle">Modifica ejercicios, enlaces y añade nuevos</p>
-    <div class="field">
-      <label for="editorDaySelect">Día que quieres editar</label>
-      <select id="editorDaySelect" onchange="renderEditor(Number(this.value))">
-        <option value="1">Día 1</option><option value="2">Día 2</option><option value="3">Día 3</option><option value="4">Día 4</option>
-      </select>
-    </div>
-    <div id="editor-list"></div>
-    <div class="button-grid">
-      <button class="success-btn" onclick="addExerciseToDay()">Añadir ejercicio</button>
-      <button class="primary-btn" onclick="saveRoutineEdits()">Guardar cambios de rutina</button>
-      <button class="light-btn" onclick="resetRoutineData()">Restablecer rutina original</button>
-    </div>
-    <div class="screen-actions">
-      <button class="light-btn" onclick="goBack()">Volver</button>
-      <button class="accent-btn" onclick="goHome()">Inicio</button>
-    </div>
-  </section>
+<section id="screen-editor" class="screen">
+  <h2>Editar rutina</h2>
+  <p class="subtitle">Modifica ejercicios, enlaces y añade nuevos</p>
+  <div class="field">
+    <label for="editorDaySelect">Día que quieres editar</label>
+    <select id="editorDaySelect">
+      <option value="1">Día 1</option><option value="2">Día 2</option><option value="3">Día 3</option><option value="4">Día 4</option>
+    </select>
+  </div>
+  <div id="editor-list"></div>
+  <div class="button-grid">
+    <button class="success-btn" onclick="addExerciseToDay()">Añadir ejercicio</button>
+    <button class="primary-btn" onclick="saveRoutineEdits()">Guardar cambios de rutina</button>
+    <button class="light-btn" onclick="resetRoutineData()">Restablecer rutina original</button>
+  </div>
+  <div class="screen-actions"><button class="light-btn" onclick="goBack()">Volver</button><button class="accent-btn" onclick="goHome()">Inicio</button></div>
+</section>
 
-  <section id="screen-webview" class="screen">
-    <h2 id="webview-title">Ejercicio</h2>
-    <iframe id="webview-frame" referrerpolicy="no-referrer"></iframe>
-    <div class="button-grid"><button class="secondary-btn" onclick="openExternalCurrent()">Abrir fuera</button></div>
-    <div class="screen-actions">
-      <button class="light-btn" onclick="goBack()">Volver</button>
-      <button class="accent-btn" onclick="goHome()">Inicio</button>
-    </div>
-  </section>
+
+<section id="screen-medidas" class="screen">
+  <h2>Medidas</h2>
+  <p class="subtitle">Selecciona el tipo de medición</p>
+  <div class="button-grid">
+    <button class="primary-btn" onclick="openMeasuresScreen('basic')">Medidas antropométricas básicas</button>
+    <button class="secondary-btn" onclick="openMeasuresScreen('perimeters')">Perímetros corporales</button>
+    <button class="alt-btn" onclick="openMeasuresScreen('skinfolds')">Pliegues cutáneos</button>
+  </div>
+  <div class="screen-actions"><button class="light-btn" onclick="goBack()">Volver</button><button class="accent-btn" onclick="goHome()">Inicio</button></div>
+</section>
+
+<section id="screen-measures-table" class="screen">
+  <h2 id="measures-title">Medidas</h2>
+  <p class="subtitle">Rellena la tabla semanalmente</p>
+  <div class="table-wrap">
+    <table id="measures-table">
+      <thead><tr id="measures-head"></tr></thead>
+      <tbody id="measures-body"></tbody>
+    </table>
+  </div>
+  <div class="button-grid">
+    <button class="success-btn" onclick="addMeasuresRow()">Añadir fila</button>
+    <button class="primary-btn" onclick="saveMeasuresTable()">Guardar medidas</button>
+  </div>
+  <div class="screen-actions"><button class="light-btn" onclick="goBack()">Volver</button><button class="accent-btn" onclick="goHome()">Inicio</button></div>
+</section>
+
+<section id="screen-webview" class="screen">
+  <h2 id="webview-title">Ejercicio</h2>
+  <iframe id="webview-frame" referrerpolicy="no-referrer"></iframe>
+  <div class="button-grid"><button class="secondary-btn" onclick="openExternalCurrent()">Abrir fuera</button></div>
+  <div class="screen-actions"><button class="light-btn" onclick="goBack()">Volver</button><button class="accent-btn" onclick="goHome()">Inicio</button></div>
+</section>
 </div>
 
 <div id="registroPopup" class="popup-overlay">
@@ -153,10 +154,7 @@
     <h3 id="popupTitle">Registrar ejercicio</h3>
     <p class="subtitle" style="margin-bottom:8px">Rellena las series. Cuando completes la última columna, aparecerá una nueva fila.</p>
     <table id="registroTable"><thead><tr id="registroHeadRow"></tr></thead><tbody></tbody></table>
-    <div class="button-grid">
-      <button class="accent-btn" onclick="saveCurrentRecord()">Guardar registro</button>
-      <button class="light-btn" onclick="closePopup()">Cerrar</button>
-    </div>
+    <div class="button-grid"><button class="accent-btn" onclick="saveCurrentRecord()">Guardar registro</button><button class="light-btn" onclick="closePopup()">Cerrar</button></div>
   </div>
 </div>
 
@@ -732,200 +730,192 @@
   ]
 }
 </script>
+<script id="measures-templates" type="application/json">
+{
+  "basic": [
+    "Fecha",
+    "Peso corporal",
+    "Altura",
+    "Índice de masa corporal (IMC)"
+  ],
+  "perimeters": [
+    "Fecha",
+    "Contorno de cuello",
+    "Contorno de hombros",
+    "Contorno de tórax",
+    "Contorno de pecho",
+    "Contorno submamario",
+    "Contorno de cintura",
+    "Contorno abdominal a nivel de ombligo",
+    "Contorno de cintura mínima",
+    "Contorno de cadera",
+    "Índice cintura-cadera",
+    "Índice cintura-altura",
+    "Contorno de glúteo máximo",
+    "Contorno de muslo superior",
+    "Contorno de muslo medio",
+    "Contorno de rodilla",
+    "Contorno de pantorrilla",
+    "Contorno de brazo relajado",
+    "Contorno de brazo contraído",
+    "Contorno de antebrazo",
+    "Contorno de muñeca"
+  ],
+  "skinfolds": [
+    "Fecha",
+    "Pliegue tricipital",
+    "Pliegue bicipital",
+    "Pliegue subescapular",
+    "Pliegue suprailiaco",
+    "Pliegue abdominal",
+    "Pliegue muslo frontal",
+    "Pliegue de la pierna o pantorrilla medial",
+    "Pliegue axilar medio",
+    "Pliegue pectoral"
+  ]
+}
+</script>
 
 <script>
-const STORAGE_KEY='rutina_ana_registros_editable_v4';
-const ROUTINE_STORAGE_KEY='rutina_ana_datos_editables_v4';
+const STORAGE_KEY='rutina_ana_registros_editable_v4_fix';
+const ROUTINE_STORAGE_KEY='rutina_ana_datos_editables_v4_fix';
+const MEASURES_STORAGE_KEY='rutina_ana_medidas_v5';
+const MEASURE_TEMPLATES=JSON.parse(document.getElementById('measures-templates').textContent);
 const DEFAULT_ROUTINE_DATA=JSON.parse(document.getElementById('initial-data').textContent);
-const appState={historyStack:['screen-home'],currentDay:null,currentExerciseId:null,currentRows:[],currentSource:'rutina',currentExercise:null,currentWebUrl:''};
+const appState={historyStack:['screen-home'],currentDay:null,currentExerciseId:null,currentRows:[],currentSource:'rutina',currentExercise:null,currentWebUrl:'',currentMeasureType:null};
 let routineData=loadRoutineData();
 
-function loadRoutineData(){ try { return JSON.parse(localStorage.getItem(ROUTINE_STORAGE_KEY)||'null') || JSON.parse(JSON.stringify(DEFAULT_ROUTINE_DATA)); } catch(e) { return JSON.parse(JSON.stringify(DEFAULT_ROUTINE_DATA)); } }
-function persistRoutineData(){ localStorage.setItem(ROUTINE_STORAGE_KEY, JSON.stringify(routineData)); }
-function escapeHtml(t){ return String(t).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'","&#039;"); }
-function escapeAttr(t){ return escapeHtml(t).replaceAll('`','&#096;'); }
-function escapeJs(t){ return String(t).replaceAll('\\','\\\\').replaceAll("'","\\'"); }
-function svgToDataUri(svg){ return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg); }
-function getExerciseImageSvg(title,text,color){ return "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 450'><rect width='800' height='450' rx='30' fill='"+color+"'/><text x='60' y='140' font-size='38' font-family='Arial' font-weight='700' fill='#7b3258'>"+escapeHtml(title)+"</text><text x='60' y='210' font-size='28' font-family='Arial' fill='#5c3047'>"+escapeHtml(text)+"</text></svg>"; }
-function showScreen(id){ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active')); document.getElementById(id).classList.add('active'); if(!appState.historyStack.length || appState.historyStack[appState.historyStack.length-1]!==id) appState.historyStack.push(id); }
-function goHome(){ appState.historyStack=['screen-home']; document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active')); document.getElementById('screen-home').classList.add('active'); }
-function goBack(){ if(appState.historyStack.length>1){ appState.historyStack.pop(); const prev=appState.historyStack[appState.historyStack.length-1]; document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active')); document.getElementById(prev).classList.add('active'); } else goHome(); }
-function openDay(day){ appState.currentDay=day; document.getElementById('day-title').textContent='Día '+day; renderExercises(day); showScreen('screen-day-detail'); }
-function openWebView(url,title){ if(!url) return; appState.currentWebUrl=url; document.getElementById('webview-title').textContent=title||'Ejercicio'; document.getElementById('webview-frame').src=url; showScreen('screen-webview'); }
-function openExternalCurrent(){ if(appState.currentWebUrl) window.open(appState.currentWebUrl, '_blank'); }
+function loadRoutineData(){try{return JSON.parse(localStorage.getItem(ROUTINE_STORAGE_KEY)||'null')||JSON.parse(JSON.stringify(DEFAULT_ROUTINE_DATA));}catch(e){return JSON.parse(JSON.stringify(DEFAULT_ROUTINE_DATA));}}
+function persistRoutineData(){localStorage.setItem(ROUTINE_STORAGE_KEY,JSON.stringify(routineData));}
+function escapeHtml(t){return String(t).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'","&#039;");}
+function escapeAttr(t){return escapeHtml(t).replaceAll('`','&#096;');}
+function svgToDataUri(svg){return 'data:image/svg+xml;utf8,'+encodeURIComponent(svg);}
+function getExerciseImageSvg(title,text,color){return "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 450'><rect width='800' height='450' rx='30' fill='"+color+"'/><text x='60' y='140' font-size='38' font-family='Arial' font-weight='700' fill='#7b3258'>"+escapeHtml(title)+"</text><text x='60' y='210' font-size='28' font-family='Arial' fill='#5c3047'>"+escapeHtml(text)+"</text></svg>";}
+function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');if(!appState.historyStack.length||appState.historyStack[appState.historyStack.length-1]!==id)appState.historyStack.push(id);}
+function goHome(){appState.historyStack=['screen-home'];document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById('screen-home').classList.add('active');}
+function goBack(){if(appState.historyStack.length>1){appState.historyStack.pop();const prev=appState.historyStack[appState.historyStack.length-1];document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(prev).classList.add('active');}else goHome();}
+function openDay(day){appState.currentDay=day;document.getElementById('day-title').textContent='Día '+day;renderExercises(day);showScreen('screen-day-detail');}
+function openWebView(url,title){if(!url)return;appState.currentWebUrl=url;document.getElementById('webview-title').textContent=title||'Ejercicio';document.getElementById('webview-frame').src=url;showScreen('screen-webview');}
+function openExternalCurrent(){if(appState.currentWebUrl)window.open(appState.currentWebUrl,'_blank');}
 
 function renderExercises(day){
   const list=document.getElementById('exercise-list');
   const items=routineData[String(day)]||[];
-  let html='';
+  list.innerHTML='';
+  if(!items.length){list.innerHTML='<div class="empty-box">No hay ejercicios en este día.</div>';return;}
   items.forEach(ex=>{
-    html += '<div class="exercise-card">';
-    html += '<h3>'+escapeHtml(ex.title)+'</h3>';
-    html += '<div class="chip">'+escapeHtml(ex.zone||'')+'</div>';
-    html += '<div class="chip">'+Number(ex.sets||3)+' series</div>';
-    html += '<p class="exercise-desc">'+escapeHtml(ex.text)+'</p>';
-    html += '<div class="exercise-meta">'+escapeHtml(ex.detail||'')+'</div>';
-    html += '<div class="howto"><strong>Cómo hacerlo</strong><br>'+escapeHtml(ex.howto||'')+'</div>';
-    html += '<img class="exercise-image" alt="'+escapeHtml(ex.title)+'" src="'+svgToDataUri(getExerciseImageSvg(ex.title,ex.text,ex.color||'#ffd8ea'))+'">';
-    html += '<button class="secondary-btn" onclick="openRegistro('+day+', ''+escapeJs(ex.id)+'')">Registrar</button>';
+    const card=document.createElement('div');
+    card.className='exercise-card';
+    let html='';
+    html+='<h3>'+escapeHtml(ex.title)+'</h3>';
+    html+='<div class="chip">'+escapeHtml(ex.zone||'')+'</div>';
+    html+='<div class="chip">'+Number(ex.sets||3)+' series</div>';
+    html+='<p class="exercise-desc">'+escapeHtml(ex.text)+'</p>';
+    html+='<div class="exercise-meta">'+escapeHtml(ex.detail||'')+'</div>';
+    html+='<div class="howto"><strong>Cómo hacerlo</strong><br>'+escapeHtml(ex.howto||'')+'</div>';
+    html+='<img class="exercise-image" alt="'+escapeHtml(ex.title)+'" src="'+svgToDataUri(getExerciseImageSvg(ex.title,ex.text,ex.color||'#ffd8ea'))+'">';
+    card.innerHTML=html;
+
+    const btnReg=document.createElement('button');
+    btnReg.className='secondary-btn';
+    btnReg.textContent='Registrar';
+    btnReg.addEventListener('click',()=>openRegistro(day, ex.id));
+    card.appendChild(btnReg);
+
     if(ex.link){
-      html += '<div style="height:10px"></div>';
-      html += '<button class="light-btn" onclick="openWebView(''+escapeJs(ex.link)+'', ''+escapeJs(ex.text||ex.title)+'')">Ver ejercicio</button>';
+      const gap=document.createElement('div'); gap.style.height='10px'; card.appendChild(gap);
+      const btnLink=document.createElement('button');
+      btnLink.className='light-btn';
+      btnLink.textContent='Ver ejercicio';
+      btnLink.addEventListener('click',()=>openWebView(ex.link, ex.text||ex.title));
+      card.appendChild(btnLink);
     }
-    html += '<div style="height:10px"></div>';
-    html += '<button class="alt-btn" onclick="openAlternativeRegistro('+day+', ''+escapeJs(ex.id)+'')">Ejercicio alternativo</button>';
+
+    const gap2=document.createElement('div'); gap2.style.height='10px'; card.appendChild(gap2);
+    const btnAlt=document.createElement('button');
+    btnAlt.className='alt-btn';
+    btnAlt.textContent='Ejercicio alternativo';
+    btnAlt.addEventListener('click',()=>openAlternativeRegistro(day, ex.id));
+    card.appendChild(btnAlt);
+
     if(ex.alternative && ex.alternative.link){
-      html += '<div style="height:10px"></div>';
-      html += '<button class="light-btn" onclick="openWebView(''+escapeJs(ex.alternative.link)+'', ''+escapeJs(ex.alternative.title)+'')">Ver alternativo</button>';
+      const gap3=document.createElement('div'); gap3.style.height='10px'; card.appendChild(gap3);
+      const btnAltLink=document.createElement('button');
+      btnAltLink.className='light-btn';
+      btnAltLink.textContent='Ver alternativo';
+      btnAltLink.addEventListener('click',()=>openWebView(ex.alternative.link, ex.alternative.title));
+      card.appendChild(btnAltLink);
     }
-    html += '</div>';
+    list.appendChild(card);
   });
-  list.innerHTML = html || '<div class="empty-box">No hay ejercicios en este día.</div>';
 }
 
-function createEmptyRow(label,sets){ return {dia:label,serie1:'',serie2:'',serie3:'',serie4:sets===4?'':undefined}; }
-function openRegistro(day,id){
-  const ex=(routineData[String(day)]||[]).find(x=>x.id===id); if(!ex) return;
-  appState.currentDay=day; appState.currentExerciseId=id; appState.currentSource='rutina'; appState.currentExercise=ex;
-  const rec=getSavedRecords().find(r=>r.exerciseId===id && r.source==='rutina');
-  appState.currentRows = rec ? JSON.parse(JSON.stringify(rec.rows)) : [createEmptyRow('Día '+day, Number(ex.sets||3))];
-  renderRegistroTable(Number(ex.sets||3)); document.getElementById('popupTitle').textContent='Registrar '+ex.title; document.getElementById('registroPopup').classList.add('active');
+function createEmptyRow(label,sets){return {dia:label,serie1:'',serie2:'',serie3:'',serie4:sets===4?'':undefined};}
+function openRegistro(day,id){const ex=(routineData[String(day)]||[]).find(x=>x.id===id);if(!ex)return;appState.currentDay=day;appState.currentExerciseId=id;appState.currentSource='rutina';appState.currentExercise=ex;const rec=getSavedRecords().find(r=>r.exerciseId===id&&r.source==='rutina');appState.currentRows=rec?JSON.parse(JSON.stringify(rec.rows)):[createEmptyRow('Día '+day,Number(ex.sets||3))];renderRegistroTable(Number(ex.sets||3));document.getElementById('popupTitle').textContent='Registrar '+ex.title;document.getElementById('registroPopup').classList.add('active');}
+function openAlternativeRegistro(day,id){const base=(routineData[String(day)]||[]).find(x=>x.id===id);const ex=base&&base.alternative?base.alternative:null;if(!ex)return;appState.currentDay=day;appState.currentExerciseId=id+'_alt';appState.currentSource='alternativo';appState.currentExercise=ex;const rec=getSavedRecords().find(r=>r.exerciseId===appState.currentExerciseId&&r.source==='alternativo');appState.currentRows=rec?JSON.parse(JSON.stringify(rec.rows)):[createEmptyRow('Día '+day+' alternativo',Number(ex.sets||3))];renderRegistroTable(Number(ex.sets||3));document.getElementById('popupTitle').textContent='Registrar alternativo · '+ex.title;document.getElementById('registroPopup').classList.add('active');}
+function renderRegistroTable(sets){document.getElementById('registroHeadRow').innerHTML='<th>Dia</th><th>Serie 1</th><th>Serie 2</th><th>Serie 3</th>'+(sets===4?'<th>Serie 4</th>':'');const tbody=document.querySelector('#registroTable tbody');tbody.innerHTML='';appState.currentRows.forEach((row,i)=>{const tr=document.createElement('tr');tr.innerHTML='<td><input type="text" value="'+escapeAttr(row.dia||'')+'" data-index="'+i+'" data-field="dia"></td>'+'<td><input type="text" value="'+escapeAttr(row.serie1||'')+'" data-index="'+i+'" data-field="serie1"></td>'+'<td><input type="text" value="'+escapeAttr(row.serie2||'')+'" data-index="'+i+'" data-field="serie2"></td>'+'<td><input type="text" value="'+escapeAttr(row.serie3||'')+'" data-index="'+i+'" data-field="serie3"></td>'+(sets===4?'<td><input type="text" value="'+escapeAttr(row.serie4||'')+'" data-index="'+i+'" data-field="serie4"></td>':'');tbody.appendChild(tr);});tbody.querySelectorAll('input').forEach(inp=>inp.addEventListener('input',handleTableInput));}
+function handleTableInput(e){const inp=e.target,index=Number(inp.dataset.index),field=inp.dataset.field,sets=Number(appState.currentExercise.sets||3);appState.currentRows[index][field]=inp.value;const lastField=sets===4?'serie4':'serie3';if(field===lastField&&index===appState.currentRows.length-1&&inp.value.trim()!==''){const label=appState.currentSource==='alternativo'?('Día '+appState.currentDay+' alternativo'):('Día '+appState.currentDay);appState.currentRows.push(createEmptyRow(label,sets));renderRegistroTable(sets);}}
+function closePopup(){document.getElementById('registroPopup').classList.remove('active');}
+function getSavedRecords(){try{return JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]');}catch(e){return [];}}
+function saveCurrentRecord(){const sets=Number(appState.currentExercise&&appState.currentExercise.sets?appState.currentExercise.sets:3);const rows=appState.currentRows.filter(r=>(r.dia||'').trim()||(r.serie1||'').trim()||(r.serie2||'').trim()||(r.serie3||'').trim()||(r.serie4||'').trim());const all=getSavedRecords();const rec={exerciseId:appState.currentExerciseId,exerciseTitle:appState.currentExercise.title,exerciseText:appState.currentExercise.text,source:appState.currentSource,day:appState.currentDay,sets:sets,rows:rows,updatedAt:new Date().toLocaleString('es-ES')};const idx=all.findIndex(r=>r.exerciseId===rec.exerciseId&&r.source===rec.source);if(idx>=0)all[idx]=rec;else all.push(rec);localStorage.setItem(STORAGE_KEY,JSON.stringify(all));closePopup();alert('Registro guardado correctamente');}
+function renderHistory(){const list=document.getElementById('history-list'),all=getSavedRecords();if(!all.length){list.innerHTML='<div class="empty-box">Aún no hay datos guardados.</div>';return;}const grouped={};all.forEach(r=>{const key=r.source==='alternativo'?('Día '+r.day+' · Alternativo'):('Día '+r.day);if(!grouped[key])grouped[key]=[];grouped[key].push(r);});let html='';Object.keys(grouped).sort((a,b)=>a.localeCompare(b,'es')).forEach(key=>{html+='<div class="card"><h3>'+escapeHtml(key)+'</h3>';grouped[key].forEach(r=>{html+='<div class="history-card"><strong>'+escapeHtml(r.exerciseTitle)+'</strong><div class="exercise-meta">'+escapeHtml(r.exerciseText)+' · '+r.sets+' series · Última actualización '+escapeHtml(r.updatedAt)+'</div><table><thead><tr><th>Dia</th><th>Serie 1</th><th>Serie 2</th><th>Serie 3</th>'+(r.sets===4?'<th>Serie 4</th>':'')+'</tr></thead><tbody>';r.rows.forEach(row=>{html+='<tr><td>'+escapeHtml(row.dia||'')+'</td><td>'+escapeHtml(row.serie1||'')+'</td><td>'+escapeHtml(row.serie2||'')+'</td><td>'+escapeHtml(row.serie3||'')+'</td>'+(r.sets===4?'<td>'+escapeHtml(row.serie4||'')+'</td>':'')+'</tr>';});html+='</tbody></table></div>';});html+='</div>';});list.innerHTML=html;}
+
+function openEditor(){const sel=document.getElementById('editorDaySelect');sel.value='1';sel.onchange=()=>renderEditor(Number(sel.value));renderEditor(1);showScreen('screen-editor');}
+function editorInput(label,fieldPath,day,index,value,type){const v=value==null?'':String(value);const control=type==='textarea'?'<textarea data-day="'+day+'" data-index="'+index+'" data-field="'+fieldPath+'">'+escapeHtml(v)+'</textarea>':'<input type="'+(type||'text')+'" value="'+escapeAttr(v)+'" data-day="'+day+'" data-index="'+index+'" data-field="'+fieldPath+'">';return '<div class="field"><label>'+escapeHtml(label)+'</label>'+control+'</div>';}
+function renderEditor(day){const items=routineData[String(day)]||[],list=document.getElementById('editor-list');let html='';items.forEach((ex,index)=>{html+='<div class="editor-block"><h3>'+escapeHtml(ex.title)+'</h3>'+editorInput('Título visible','title',day,index,ex.title)+editorInput('Nombre del ejercicio','text',day,index,ex.text)+editorInput('Detalle','detail',day,index,ex.detail)+editorInput('Zona','zone',day,index,ex.zone)+editorInput('Series','sets',day,index,ex.sets,'number')+editorInput('Explicación','howto',day,index,ex.howto,'textarea')+editorInput('Color','color',day,index,ex.color||'')+editorInput('Link ejercicio','link',day,index,ex.link||'')+'<div class="howto"><strong>Alternativo</strong></div>'+editorInput('Título alternativo','alternative.title',day,index,ex.alternative&&ex.alternative.title||'')+editorInput('Ejercicio alternativo','alternative.text',day,index,ex.alternative&&ex.alternative.text||'')+editorInput('Detalle alternativo','alternative.detail',day,index,ex.alternative&&ex.alternative.detail||'')+editorInput('Material alternativo','alternative.material',day,index,ex.alternative&&ex.alternative.material||'')+editorInput('Series alternativo','alternative.sets',day,index,ex.alternative&&ex.alternative.sets||3,'number')+editorInput('Explicación alternativo','alternative.howto',day,index,ex.alternative&&ex.alternative.howto||'','textarea')+editorInput('Link alternativo','alternative.link',day,index,ex.alternative&&ex.alternative.link||'')+'<button class="danger-btn" type="button" onclick="removeExercise('+day+', '+index+')">Eliminar este ejercicio</button></div>';});list.innerHTML=html||'<div class="empty-box">No hay ejercicios para editar en este día.</div>';}
+function setNestedValue(obj,path,value){const parts=path.split('.');let cur=obj;for(let i=0;i<parts.length-1;i++){if(!cur[parts[i]])cur[parts[i]]={};cur=cur[parts[i]];}cur[parts[parts.length-1]]=value;}
+function saveRoutineEdits(){document.querySelectorAll('#editor-list input, #editor-list textarea').forEach(el=>{const day=String(el.dataset.day),index=Number(el.dataset.index),field=el.dataset.field,value=el.type==='number'?Number(el.value||0):el.value;setNestedValue(routineData[day][index],field,value);});persistRoutineData();if(appState.currentDay)renderExercises(appState.currentDay);alert('Cambios de rutina guardados correctamente');}
+function addExerciseToDay(){const day=String(document.getElementById('editorDaySelect').value);const nextNum=(routineData[day]||[]).length+1;routineData[day].push({id:'d'+day+'e'+nextNum+'_'+Date.now(),title:'Ejercicio '+nextNum,text:'Nuevo ejercicio',detail:'3 series de 12 repeticiones.',zone:'Sin definir',sets:3,color:'#ffd8ea',howto:'Explicación pendiente.',link:'',alternative:{title:'Alternativo '+nextNum,text:'Nuevo alternativo',detail:'3 series de 12 repeticiones.',sets:3,material:'Sin definir',howto:'Explicación alternativa pendiente.',link:''}});persistRoutineData();renderEditor(Number(day));}
+function removeExercise(day,index){const key=String(day);if(!confirm('¿Eliminar este ejercicio?'))return;routineData[key].splice(index,1);persistRoutineData();renderEditor(Number(day));}
+function resetRoutineData(){if(!confirm('Se restaurará la rutina original. ¿Continuar?'))return;routineData=JSON.parse(JSON.stringify(DEFAULT_ROUTINE_DATA));persistRoutineData();renderEditor(Number(document.getElementById('editorDaySelect').value||1));if(appState.currentDay)renderExercises(appState.currentDay);alert('Rutina original restaurada');}
+
+
+function loadMeasuresData(){ try { return JSON.parse(localStorage.getItem(MEASURES_STORAGE_KEY)||'{}'); } catch(e) { return {}; } }
+function persistMeasuresData(data){ localStorage.setItem(MEASURES_STORAGE_KEY, JSON.stringify(data)); }
+function getMeasureTitle(type){
+  return type==='basic' ? 'Medidas antropométricas básicas' : type==='perimeters' ? 'Perímetros corporales' : 'Pliegues cutáneos';
 }
-function openAlternativeRegistro(day,id){
-  const base=(routineData[String(day)]||[]).find(x=>x.id===id); const ex=base && base.alternative ? base.alternative : null; if(!ex) return;
-  appState.currentDay=day; appState.currentExerciseId=id+'_alt'; appState.currentSource='alternativo'; appState.currentExercise=ex;
-  const rec=getSavedRecords().find(r=>r.exerciseId===appState.currentExerciseId && r.source==='alternativo');
-  appState.currentRows = rec ? JSON.parse(JSON.stringify(rec.rows)) : [createEmptyRow('Día '+day+' alternativo', Number(ex.sets||3))];
-  renderRegistroTable(Number(ex.sets||3)); document.getElementById('popupTitle').textContent='Registrar alternativo · '+ex.title; document.getElementById('registroPopup').classList.add('active');
+function openMeasuresScreen(type){
+  appState.currentMeasureType = type;
+  document.getElementById('measures-title').textContent = getMeasureTitle(type);
+  renderMeasuresTable(type);
+  showScreen('screen-measures-table');
 }
-function renderRegistroTable(sets){
-  document.getElementById('registroHeadRow').innerHTML='<th>Dia</th><th>Serie 1</th><th>Serie 2</th><th>Serie 3</th>'+(sets===4?'<th>Serie 4</th>':'');
-  const tbody=document.querySelector('#registroTable tbody'); tbody.innerHTML='';
-  appState.currentRows.forEach((row,i)=>{
-    const tr=document.createElement('tr');
-    tr.innerHTML='<td><input type="text" value="'+escapeAttr(row.dia||'')+'" data-index="'+i+'" data-field="dia"></td>'
-      +'<td><input type="text" value="'+escapeAttr(row.serie1||'')+'" data-index="'+i+'" data-field="serie1"></td>'
-      +'<td><input type="text" value="'+escapeAttr(row.serie2||'')+'" data-index="'+i+'" data-field="serie2"></td>'
-      +'<td><input type="text" value="'+escapeAttr(row.serie3||'')+'" data-index="'+i+'" data-field="serie3"></td>'
-      +(sets===4?'<td><input type="text" value="'+escapeAttr(row.serie4||'')+'" data-index="'+i+'" data-field="serie4"></td>':'');
-    tbody.appendChild(tr);
+function renderMeasuresTable(type){
+  const headers = MEASURE_TEMPLATES[type] || [];
+  const data = loadMeasuresData();
+  const rows = data[type] || [];
+  document.getElementById('measures-head').innerHTML = headers.map(h => '<th>'+escapeHtml(h)+'</th>').join('');
+  const body = document.getElementById('measures-body');
+  body.innerHTML = '';
+  if(!rows.length){ addMeasuresRow(); return; }
+  rows.forEach((row, rowIndex) => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = headers.map((h, colIndex) => '<td><input type="text" value="'+escapeAttr(row[colIndex] || '')+'" data-row="'+rowIndex+'" data-col="'+colIndex+'"></td>').join('');
+    body.appendChild(tr);
   });
-  tbody.querySelectorAll('input').forEach(inp=>inp.addEventListener('input', handleTableInput));
 }
-function handleTableInput(e){
-  const inp=e.target, index=Number(inp.dataset.index), field=inp.dataset.field, sets=Number(appState.currentExercise.sets||3);
-  appState.currentRows[index][field]=inp.value;
-  const lastField=sets===4?'serie4':'serie3';
-  if(field===lastField && index===appState.currentRows.length-1 && inp.value.trim()!==''){
-    const label=appState.currentSource==='alternativo' ? ('Día '+appState.currentDay+' alternativo') : ('Día '+appState.currentDay);
-    appState.currentRows.push(createEmptyRow(label, sets)); renderRegistroTable(sets);
-  }
+function addMeasuresRow(){
+  const type = appState.currentMeasureType;
+  const headers = MEASURE_TEMPLATES[type] || [];
+  const body = document.getElementById('measures-body');
+  const rowIndex = body.children.length;
+  const tr = document.createElement('tr');
+  tr.innerHTML = headers.map((_, colIndex) => '<td><input type="text" data-row="'+rowIndex+'" data-col="'+colIndex+'"></td>').join('');
+  body.appendChild(tr);
 }
-function closePopup(){ document.getElementById('registroPopup').classList.remove('active'); }
-function getSavedRecords(){ try{ return JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]'); } catch(e){ return []; } }
-function saveCurrentRecord(){
-  const sets=Number(appState.currentExercise && appState.currentExercise.sets ? appState.currentExercise.sets : 3);
-  const rows=appState.currentRows.filter(r => (r.dia||'').trim() || (r.serie1||'').trim() || (r.serie2||'').trim() || (r.serie3||'').trim() || (r.serie4||'').trim());
-  const all=getSavedRecords();
-  const rec={exerciseId:appState.currentExerciseId,exerciseTitle:appState.currentExercise.title,exerciseText:appState.currentExercise.text,source:appState.currentSource,day:appState.currentDay,sets:sets,rows:rows,updatedAt:new Date().toLocaleString('es-ES')};
-  const idx=all.findIndex(r => r.exerciseId===rec.exerciseId && r.source===rec.source);
-  if(idx>=0) all[idx]=rec; else all.push(rec);
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(all));
-  closePopup(); alert('Registro guardado correctamente');
-}
-function renderHistory(){
-  const list=document.getElementById('history-list'), all=getSavedRecords();
-  if(!all.length){ list.innerHTML='<div class="empty-box">Aún no hay datos guardados.</div>'; return; }
-  const grouped={};
-  all.forEach(r=>{ const key=r.source==='alternativo' ? ('Día '+r.day+' · Alternativo') : ('Día '+r.day); if(!grouped[key]) grouped[key]=[]; grouped[key].push(r); });
-  let html='';
-  Object.keys(grouped).sort((a,b)=>a.localeCompare(b,'es')).forEach(key=>{
-    html+='<div class="card"><h3>'+escapeHtml(key)+'</h3>';
-    grouped[key].forEach(r=>{
-      html+='<div class="history-card"><strong>'+escapeHtml(r.exerciseTitle)+'</strong><div class="exercise-meta">'+escapeHtml(r.exerciseText)+' · '+r.sets+' series · Última actualización '+escapeHtml(r.updatedAt)+'</div><table><thead><tr><th>Dia</th><th>Serie 1</th><th>Serie 2</th><th>Serie 3</th>'+(r.sets===4?'<th>Serie 4</th>':'')+'</tr></thead><tbody>';
-      r.rows.forEach(row=>{ html+='<tr><td>'+escapeHtml(row.dia||'')+'</td><td>'+escapeHtml(row.serie1||'')+'</td><td>'+escapeHtml(row.serie2||'')+'</td><td>'+escapeHtml(row.serie3||'')+'</td>'+(r.sets===4?'<td>'+escapeHtml(row.serie4||'')+'</td>':'')+'</tr>'; });
-      html+='</tbody></table></div>';
-    });
-    html+='</div>';
-  });
-  list.innerHTML=html;
+function saveMeasuresTable(){
+  const type = appState.currentMeasureType;
+  const body = document.getElementById('measures-body');
+  const rows = Array.from(body.querySelectorAll('tr')).map(tr => Array.from(tr.querySelectorAll('input')).map(inp => inp.value));
+  const filtered = rows.filter(r => r.some(v => String(v).trim() !== ''));
+  const data = loadMeasuresData();
+  data[type] = filtered;
+  persistMeasuresData(data);
+  alert('Medidas guardadas correctamente');
 }
 
-function openEditor(){ document.getElementById('editorDaySelect').value='1'; renderEditor(1); showScreen('screen-editor'); }
-function editorInput(label,fieldPath,day,index,value,type){
-  const v=value==null?'':String(value);
-  const control=type==='textarea'
-    ? '<textarea data-day="'+day+'" data-index="'+index+'" data-field="'+fieldPath+'">'+escapeHtml(v)+'</textarea>'
-    : '<input type="'+(type||'text')+'" value="'+escapeAttr(v)+'" data-day="'+day+'" data-index="'+index+'" data-field="'+fieldPath+'">';
-  return '<div class="field"><label>'+escapeHtml(label)+'</label>'+control+'</div>';
-}
-function renderEditor(day){
-  const items=routineData[String(day)]||[], list=document.getElementById('editor-list'); let html='';
-  items.forEach((ex,index)=>{
-    html+='<div class="editor-block"><h3>'+escapeHtml(ex.title)+'</h3>'
-      +editorInput('Título visible','title',day,index,ex.title)
-      +editorInput('Nombre del ejercicio','text',day,index,ex.text)
-      +editorInput('Detalle','detail',day,index,ex.detail)
-      +editorInput('Zona','zone',day,index,ex.zone)
-      +editorInput('Series','sets',day,index,ex.sets,'number')
-      +editorInput('Explicación','howto',day,index,ex.howto,'textarea')
-      +editorInput('Color','color',day,index,ex.color||'')
-      +editorInput('Link ejercicio','link',day,index,ex.link||'')
-      +'<div class="howto"><strong>Alternativo</strong></div>'
-      +editorInput('Título alternativo','alternative.title',day,index,ex.alternative && ex.alternative.title || '')
-      +editorInput('Ejercicio alternativo','alternative.text',day,index,ex.alternative && ex.alternative.text || '')
-      +editorInput('Detalle alternativo','alternative.detail',day,index,ex.alternative && ex.alternative.detail || '')
-      +editorInput('Material alternativo','alternative.material',day,index,ex.alternative && ex.alternative.material || '')
-      +editorInput('Series alternativo','alternative.sets',day,index,ex.alternative && ex.alternative.sets || 3,'number')
-      +editorInput('Explicación alternativo','alternative.howto',day,index,ex.alternative && ex.alternative.howto || '','textarea')
-      +editorInput('Link alternativo','alternative.link',day,index,ex.alternative && ex.alternative.link || '')
-      +'<button class="danger-btn" onclick="removeExercise('+day+', '+index+')">Eliminar este ejercicio</button>'
-      +'</div>';
-  });
-  list.innerHTML=html || '<div class="empty-box">No hay ejercicios para editar en este día.</div>';
-}
-function setNestedValue(obj,path,value){ const parts=path.split('.'); let cur=obj; for(let i=0;i<parts.length-1;i++){ if(!cur[parts[i]]) cur[parts[i]]={}; cur=cur[parts[i]]; } cur[parts[parts.length-1]]=value; }
-function saveRoutineEdits(){
-  document.querySelectorAll('#editor-list input, #editor-list textarea').forEach(el=>{
-    const day=String(el.dataset.day), index=Number(el.dataset.index), field=el.dataset.field;
-    const value=el.type==='number' ? Number(el.value||0) : el.value;
-    setNestedValue(routineData[day][index], field, value);
-  });
-  persistRoutineData();
-  if(appState.currentDay) renderExercises(appState.currentDay);
-  alert('Cambios de rutina guardados correctamente');
-}
-function addExerciseToDay(){
-  const day=String(document.getElementById('editorDaySelect').value);
-  const nextNum=(routineData[day]||[]).length+1;
-  routineData[day].push({
-    id:'d'+day+'e'+nextNum+'_'+Date.now(),
-    title:'Ejercicio '+nextNum,
-    text:'Nuevo ejercicio',
-    detail:'3 series de 12 repeticiones.',
-    zone:'Sin definir',
-    sets:3,
-    color:'#ffd8ea',
-    howto:'Explicación pendiente.',
-    link:'',
-    alternative:{title:'Alternativo '+nextNum,text:'Nuevo alternativo',detail:'3 series de 12 repeticiones.',sets:3,material:'Sin definir',howto:'Explicación alternativa pendiente.',link:''}
-  });
-  persistRoutineData(); renderEditor(Number(day));
-}
-function removeExercise(day,index){
-  const key=String(day);
-  if(!confirm('¿Eliminar este ejercicio?')) return;
-  routineData[key].splice(index,1);
-  persistRoutineData(); renderEditor(Number(day));
-}
-function resetRoutineData(){
-  if(!confirm('Se restaurará la rutina original. ¿Continuar?')) return;
-  routineData=JSON.parse(JSON.stringify(DEFAULT_ROUTINE_DATA));
-  persistRoutineData();
-  renderEditor(Number(document.getElementById('editorDaySelect').value||1));
-  if(appState.currentDay) renderExercises(appState.currentDay);
-  alert('Rutina original restaurada');
-}
+document.addEventListener('DOMContentLoaded',()=>{document.getElementById('homeImage').addEventListener('click',()=>showScreen('screen-menu'));});
 </script>
 </body>
 </html>
