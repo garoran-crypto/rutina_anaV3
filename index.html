@@ -41,6 +41,14 @@ th { background:#fff0f7; color:#7b3258; }
 .empty-box { background:#fff8fb; border:1px dashed #efbdd3; border-radius:16px; padding:18px; text-align:center; color:#8a5870; margin-top:16px; }
 .table-wrap { overflow-x:auto; border:1px solid #f2c5da; border-radius:16px; background:#fff; }
 iframe { width:100%; height:68vh; border:0; border-radius:16px; background:#fff; }
+
+@media print {
+  body { background:#fff; }
+  .screen, .screen-actions, .button-grid button, #registroPopup { display:none !important; }
+  .print-only { display:block !important; }
+}
+.print-only { display:none; }
+
 </style>
 </head>
 <body>
@@ -49,10 +57,10 @@ iframe { width:100%; height:68vh; border:0; border-radius:16px; background:#fff;
   <h1>Rutina de Ana</h1>
   <p class="subtitle">Pulsa sobre la imagen para entrar en la app</p>
   <div class="card">
-    <p>Rutina de 4 días para potenciarte al máximo</p>
+    <p>Rutina 4 días para potenciarte al máximo</p>
     <img class="exercise-image" alt="Portada rutina" id="homeImage"
       src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 450'%3E%3Crect width='800' height='450' rx='30' fill='%23ffe7f2'/%3E%3Ctext x='90' y='150' font-size='52' font-family='Arial' font-weight='700' fill='%237b3258'%3ERutina de Ana%3C/text%3E%3Ctext x='90' y='230' font-size='32' font-family='Arial' fill='%235c3047'%3EToca para entrar%3C/text%3E%3Ccircle cx='650' cy='160' r='50' fill='%23f5c9a9'/%3E%3Crect x='610' y='220' width='80' height='110' rx='30' fill='%23ec4899'/%3E%3C/svg%3E">
-    <div class="small-note">Vamossssss ANA tu puedes con esto y con más.</div>
+    <div class="small-note">Vamos Ana tu puedes con esto y con más.</div>
   </div>
   <div class="screen-actions"><button class="light-btn" onclick="goHome()">Inicio</button></div>
 </section>
@@ -91,6 +99,7 @@ iframe { width:100%; height:68vh; border:0; border-radius:16px; background:#fff;
 <section id="screen-historico" class="screen">
   <h2>Historico</h2>
   <p class="subtitle">Aquí verás todos los registros guardados</p>
+  <div class="button-grid"><button class="primary-btn" onclick="exportHistoryPdf()">Generar PDF del histórico</button></div>
   <div id="history-list"></div>
   <div class="screen-actions"><button class="light-btn" onclick="goBack()">Volver</button><button class="accent-btn" onclick="goHome()">Inicio</button></div>
 </section>
@@ -137,6 +146,7 @@ iframe { width:100%; height:68vh; border:0; border-radius:16px; background:#fff;
   <div class="button-grid">
     <button class="success-btn" onclick="addMeasuresRow()">Añadir fila</button>
     <button class="primary-btn" onclick="saveMeasuresTable()">Guardar medidas</button>
+    <button class="secondary-btn" onclick="exportMeasuresPdf()">Generar PDF de medidas</button>
   </div>
   <div class="screen-actions"><button class="light-btn" onclick="goBack()">Volver</button><button class="accent-btn" onclick="goHome()">Inicio</button></div>
 </section>
@@ -913,6 +923,40 @@ function saveMeasuresTable(){
   data[type] = filtered;
   persistMeasuresData(data);
   alert('Medidas guardadas correctamente');
+}
+
+
+function openPrintWindow(title, bodyHtml){
+  const w = window.open('', '_blank');
+  if(!w){ alert('El navegador ha bloqueado la ventana emergente para imprimir.'); return; }
+  const styles = `
+    <style>
+      body{font-family:Arial,sans-serif;margin:24px;color:#333}
+      h1{font-size:24px;margin:0 0 8px;color:#a03d72}
+      h2{font-size:18px;margin:18px 0 10px;color:#7b3258}
+      .meta{color:#666;margin-bottom:16px}
+      table{width:100%;border-collapse:collapse;margin:12px 0 18px;font-size:12px}
+      th,td{border:1px solid #ddd;padding:6px 8px;text-align:left;vertical-align:top}
+      th{background:#f8e9f1}
+      .card{border:1px solid #eee;border-radius:12px;padding:12px;margin-bottom:12px}
+      .small{font-size:12px;color:#666}
+      @page{size:A4;margin:14mm}
+    </style>`;
+  w.document.write('<!DOCTYPE html><html><head><meta charset="UTF-8"><title>'+title+'</title>'+styles+'</head><body>'+bodyHtml+'</body></html>');
+  w.document.close();
+  w.focus();
+  setTimeout(()=>w.print(), 300);
+}
+function exportHistoryPdf(){
+  const content = document.getElementById('history-list').innerHTML || '<p>No hay datos guardados.</p>';
+  const body = '<h1>Histórico de entrenamiento</h1><div class="meta">Exportado desde Rutina de Ana · '+new Date().toLocaleString('es-ES')+'</div>'+content;
+  openPrintWindow('Historico Rutina Ana', body);
+}
+function exportMeasuresPdf(){
+  const title = document.getElementById('measures-title').textContent || 'Medidas';
+  const table = document.getElementById('measures-table').outerHTML;
+  const body = '<h1>'+title+'</h1><div class="meta">Exportado desde Rutina de Ana · '+new Date().toLocaleString('es-ES')+'</div>'+table;
+  openPrintWindow(title, body);
 }
 
 document.addEventListener('DOMContentLoaded',()=>{document.getElementById('homeImage').addEventListener('click',()=>showScreen('screen-menu'));});
