@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rutina de Ana editable</title>
+  <title>Rutina de Ana v4</title>
   <style>
     * { box-sizing: border-box; }
     body { margin: 0; font-family: Arial, sans-serif; background: #fff7fb; color: #4a2a3a; }
@@ -12,9 +13,7 @@
     .screen.active { display: block; }
     h1, h2, h3 { margin: 0 0 14px; line-height: 1.2; }
     h1, h2 { text-align: center; color: #a03d72; }
-    h1 { font-size: 28px; }
-    h2 { font-size: 24px; }
-    h3 { font-size: 20px; color: #7b3258; }
+    h1 { font-size: 28px; } h2 { font-size: 24px; } h3 { font-size: 20px; color: #7b3258; }
     p { line-height: 1.45; }
     .card, .exercise-card, .history-card, .popup-box {
       background: #fff; border-radius: 20px; box-shadow: 0 10px 28px rgba(160,61,114,.12);
@@ -24,19 +23,14 @@
     .button-grid, .day-grid { display: grid; gap: 12px; margin-top: 20px; }
     .day-grid { grid-template-columns: 1fr 1fr; }
     button { width: 100%; border: none; border-radius: 16px; padding: 14px 12px; font-size: 15px; font-weight: 700; cursor: pointer; }
-    .primary-btn { background: #c0558b; color: #fff; }
-    .secondary-btn { background: #8b5cf6; color: #fff; }
-    .light-btn { background: #f8dce9; color: #7b3258; }
-    .accent-btn { background: #ec4899; color: #fff; }
-    .alt-btn { background: #f59e0b; color: #fff; }
-    .success-btn { background: #10b981; color: #fff; }
+    .primary-btn { background: #c0558b; color: #fff; } .secondary-btn { background: #8b5cf6; color: #fff; }
+    .light-btn { background: #f8dce9; color: #7b3258; } .accent-btn { background: #ec4899; color: #fff; }
+    .alt-btn { background: #f59e0b; color: #fff; } .success-btn { background: #10b981; color: #fff; } .danger-btn { background: #ef4444; color: #fff; }
     .exercise-image { width: 100%; border-radius: 16px; margin: 12px 0; display: block; background: #fff8fb; }
-    .exercise-desc { color: #7a5b6a; margin-bottom: 8px; }
-    .exercise-meta { color: #9a6c82; font-size: 14px; margin-bottom: 8px; }
+    .exercise-desc { color: #7a5b6a; margin-bottom: 8px; } .exercise-meta { color: #9a6c82; font-size: 14px; margin-bottom: 8px; }
     .howto { background: #fff5fa; border: 1px solid #f6d7e5; border-radius: 14px; padding: 10px 12px; font-size: 14px; color: #7b3258; margin-bottom: 14px; }
     .chip { display: inline-block; background: #fde7f1; color: #a03d72; padding: 6px 10px; border-radius: 999px; font-size: 12px; margin-right: 6px; margin-bottom: 8px; }
-    .field { margin-bottom: 10px; }
-    .field label { display: block; font-size: 13px; color: #8a5870; margin-bottom: 6px; font-weight: 700; }
+    .field { margin-bottom: 10px; } .field label { display: block; font-size: 13px; color: #8a5870; margin-bottom: 6px; font-weight: 700; }
     input[type=text], input[type=number], textarea, select {
       width: 100%; border: 1px solid #efbdd3; border-radius: 10px; padding: 10px; font-size: 14px; color: #5c3047; background: #fffafd;
     }
@@ -49,10 +43,7 @@
       backdrop-filter: blur(8px); border-top: 1px solid #f6d7e5;
       display: flex; gap: 10px; padding: 12px 16px; z-index: 30;
     }
-    .popup-overlay {
-      position: fixed; inset: 0; background: rgba(90,35,62,.58); display: none;
-      align-items: center; justify-content: center; padding: 16px; z-index: 100;
-    }
+    .popup-overlay { position: fixed; inset: 0; background: rgba(90,35,62,.58); display: none; align-items: center; justify-content: center; padding: 16px; z-index: 100; }
     .popup-overlay.active { display: flex; }
     .popup-box { width: 100%; max-width: 420px; max-height: 90vh; overflow: auto; }
     table { width: 100%; border-collapse: collapse; margin: 12px 0 16px; font-size: 14px; }
@@ -68,14 +59,12 @@
     <h1>Rutina de Ana</h1>
     <p class="subtitle">Pulsa sobre la imagen para entrar en la app</p>
     <div class="card">
-      <p>Esta versión permite editar la rutina desde la propia web, registrar entrenos y abrir los ejercicios de EresFitness dentro de la app.</p>
+      <p>Incluye los 4 días completos, enlaces editables y botón para añadir ejercicios nuevos.</p>
       <img class="exercise-image" alt="Portada rutina" onclick="showScreen('screen-menu')"
         src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 450'%3E%3Crect width='800' height='450' rx='30' fill='%23ffe7f2'/%3E%3Ctext x='90' y='150' font-size='52' font-family='Arial' font-weight='700' fill='%237b3258'%3ERutina de Ana%3C/text%3E%3Ctext x='90' y='230' font-size='32' font-family='Arial' fill='%235c3047'%3EToca para entrar%3C/text%3E%3Ccircle cx='650' cy='160' r='50' fill='%23f5c9a9'/%3E%3Crect x='610' y='220' width='80' height='110' rx='30' fill='%23ec4899'/%3E%3C/svg%3E">
-      <div class="small-note">Si alguna página externa no se deja mostrar dentro de la app, se abrirá automáticamente en una pestaña nueva.</div>
+      <div class="small-note">Los ejercicios sin enlace ya quedan preparados para que se lo pongas en modo edición.</div>
     </div>
-    <div class="screen-actions">
-      <button class="light-btn" onclick="goHome()">Inicio</button>
-    </div>
+    <div class="screen-actions"><button class="light-btn" onclick="goHome()">Inicio</button></div>
   </section>
 
   <section id="screen-menu" class="screen">
@@ -129,19 +118,17 @@
 
   <section id="screen-editor" class="screen">
     <h2>Editar rutina</h2>
-    <p class="subtitle">Modifica ejercicios, enlaces y alternativos</p>
+    <p class="subtitle">Modifica ejercicios, enlaces y añade nuevos</p>
     <div class="field">
       <label for="editorDaySelect">Día que quieres editar</label>
       <select id="editorDaySelect" onchange="renderEditor(Number(this.value))">
-        <option value="1">Día 1</option>
-        <option value="2">Día 2</option>
-        <option value="3">Día 3</option>
-        <option value="4">Día 4</option>
+        <option value="1">Día 1</option><option value="2">Día 2</option><option value="3">Día 3</option><option value="4">Día 4</option>
       </select>
     </div>
     <div id="editor-list"></div>
     <div class="button-grid">
-      <button class="success-btn" onclick="saveRoutineEdits()">Guardar cambios de rutina</button>
+      <button class="success-btn" onclick="addExerciseToDay()">Añadir ejercicio</button>
+      <button class="primary-btn" onclick="saveRoutineEdits()">Guardar cambios de rutina</button>
       <button class="light-btn" onclick="resetRoutineData()">Restablecer rutina original</button>
     </div>
     <div class="screen-actions">
@@ -153,9 +140,7 @@
   <section id="screen-webview" class="screen">
     <h2 id="webview-title">Ejercicio</h2>
     <iframe id="webview-frame" referrerpolicy="no-referrer"></iframe>
-    <div class="button-grid">
-      <button class="secondary-btn" onclick="openExternalCurrent()">Abrir fuera</button>
-    </div>
+    <div class="button-grid"><button class="secondary-btn" onclick="openExternalCurrent()">Abrir fuera</button></div>
     <div class="screen-actions">
       <button class="light-btn" onclick="goBack()">Volver</button>
       <button class="accent-btn" onclick="goHome()">Inicio</button>
@@ -167,10 +152,7 @@
   <div class="popup-box card">
     <h3 id="popupTitle">Registrar ejercicio</h3>
     <p class="subtitle" style="margin-bottom:8px">Rellena las series. Cuando completes la última columna, aparecerá una nueva fila.</p>
-    <table id="registroTable">
-      <thead><tr id="registroHeadRow"></tr></thead>
-      <tbody></tbody>
-    </table>
+    <table id="registroTable"><thead><tr id="registroHeadRow"></tr></thead><tbody></tbody></table>
     <div class="button-grid">
       <button class="accent-btn" onclick="saveCurrentRecord()">Guardar registro</button>
       <button class="light-btn" onclick="closePopup()">Cerrar</button>
@@ -185,11 +167,11 @@
       "id": "d1e1",
       "title": "Ejercicio 1",
       "text": "Hip thrust en máquina o barra",
-      "detail": "4 series de 10 a 12 repeticiones.",
-      "zone": "Glúteo principal",
+      "detail": "4 series de 10–12 repeticiones.",
+      "zone": "Glúteo",
       "sets": 4,
       "color": "#ffd8ea",
-      "howto": "Apoya la parte alta de la espalda en un banco y empuja con los talones.",
+      "howto": "Apoya la espalda en banco, empuja con talones y contrae glúteo arriba sin arquear la lumbar.",
       "link": "https://eresfitness.com/hip-thrust/",
       "alternative": {
         "title": "Puente de glúteo con goma",
@@ -209,7 +191,7 @@
       "zone": "Pierna y glúteo",
       "sets": 4,
       "color": "#ffe8c7",
-      "howto": "Baja controlando y sube empujando con talones.",
+      "howto": "Baja controlando con el pecho alto y sube empujando con talones.",
       "link": "https://eresfitness.com/sentadillas-con-barra/",
       "alternative": {
         "title": "Sentadilla goblet",
@@ -220,6 +202,106 @@
         "howto": "Sujeta una mancuerna al pecho y mantén el pecho alto.",
         "link": "https://eresfitness.com/sentadillas-con-peso-corporal/"
       }
+    },
+    {
+      "id": "d1e3",
+      "title": "Ejercicio 3",
+      "text": "Prensa inclinada",
+      "detail": "3 series de 12 repeticiones.",
+      "zone": "Cuádriceps y glúteo",
+      "sets": 3,
+      "color": "#e9dcff",
+      "howto": "Pies altos en la plataforma, baja controlado y empuja sin bloquear rodillas.",
+      "link": "",
+      "alternative": {
+        "title": "Step-up al banco",
+        "text": "Subida a banco con peso corporal o mancuernas.",
+        "detail": "3 series de 12 por pierna.",
+        "sets": 3,
+        "material": "Peso corporal o mancuerna",
+        "howto": "Sube a un banco estable apoyando todo el pie.",
+        "link": ""
+      }
+    },
+    {
+      "id": "d1e4",
+      "title": "Ejercicio 4",
+      "text": "Peso muerto rumano con mancuernas",
+      "detail": "3 series de 12 repeticiones.",
+      "zone": "Femoral y glúteo",
+      "sets": 3,
+      "color": "#ffdfe0",
+      "howto": "Cadera hacia atrás, espalda recta, sube apretando glúteos.",
+      "link": "https://eresfitness.com/peso-muerto-rumano/",
+      "alternative": {
+        "title": "Peso muerto rumano con goma",
+        "text": "Con goma larga pisada bajo los pies.",
+        "detail": "3 series de 15 repeticiones.",
+        "sets": 3,
+        "material": "Goma",
+        "howto": "Pisa la goma y realiza la bisagra de cadera con espalda larga.",
+        "link": ""
+      }
+    },
+    {
+      "id": "d1e5",
+      "title": "Ejercicio 5",
+      "text": "Abducción en máquina",
+      "detail": "3 series de 15–20 repeticiones.",
+      "zone": "Glúteo medio",
+      "sets": 3,
+      "color": "#ffe7f5",
+      "howto": "Abre piernas controlando la vuelta sin rebote.",
+      "link": "",
+      "alternative": {
+        "title": "Abducción lateral con mini banda",
+        "text": "Separación de piernas con goma.",
+        "detail": "3 series de 20 repeticiones.",
+        "sets": 3,
+        "material": "Goma",
+        "howto": "Coloca la mini banda y separa las piernas manteniendo la cadera estable.",
+        "link": ""
+      }
+    },
+    {
+      "id": "d1e6",
+      "title": "Ejercicio 6",
+      "text": "Crunch en polea o máquina",
+      "detail": "3 series de 15 repeticiones.",
+      "zone": "Abdomen",
+      "sets": 3,
+      "color": "#e6f0ff",
+      "howto": "Flexiona el tronco desde el abdomen, no con brazos.",
+      "link": "",
+      "alternative": {
+        "title": "Crunch en el suelo",
+        "text": "Elevación de escápulas sin tirar del cuello.",
+        "detail": "3 series de 20 repeticiones.",
+        "sets": 3,
+        "material": "Peso corporal",
+        "howto": "Despega escápulas del suelo mientras llevas el ombligo hacia dentro.",
+        "link": ""
+      }
+    },
+    {
+      "id": "d1e7",
+      "title": "Ejercicio 7",
+      "text": "Caminata rápida en cinta",
+      "detail": "12–15 min.",
+      "zone": "Cardio",
+      "sets": 3,
+      "color": "#fff0d9",
+      "howto": "Ritmo constante, ligera inclinación si puedes.",
+      "link": "",
+      "alternative": {
+        "title": "Marcha rápida o step",
+        "text": "Cardio sin máquina.",
+        "detail": "15 minutos continuos.",
+        "sets": 3,
+        "material": "Peso corporal",
+        "howto": "Alterna marcha rápida en el sitio o step al cajón.",
+        "link": ""
+      }
     }
   ],
   "2": [
@@ -227,7 +309,7 @@
       "id": "d2e1",
       "title": "Ejercicio 1",
       "text": "Jalón al pecho",
-      "detail": "4 series de 10 a 12 repeticiones.",
+      "detail": "4 series de 10–12 repeticiones.",
       "zone": "Espalda",
       "sets": 4,
       "color": "#ffd8ea",
@@ -262,13 +344,113 @@
         "howto": "Lleva el codo hacia la cadera sin girar el tronco.",
         "link": "https://eresfitness.com/remo-con-mancuerna/"
       }
+    },
+    {
+      "id": "d2e3",
+      "title": "Ejercicio 3",
+      "text": "Press de pecho en máquina",
+      "detail": "3 series de 10–12 repeticiones.",
+      "zone": "Pecho y tríceps",
+      "sets": 3,
+      "color": "#e9dcff",
+      "howto": "Empuja al frente controlando la vuelta.",
+      "link": "https://eresfitness.com/press-de-pecho-en-maquina/",
+      "alternative": {
+        "title": "Flexiones inclinadas",
+        "text": "Apoyando manos en banco o pared.",
+        "detail": "3 series de 10–15 repeticiones.",
+        "sets": 3,
+        "material": "Peso corporal",
+        "howto": "Cuerpo alineado y codos en diagonal.",
+        "link": "https://eresfitness.com/flexiones/"
+      }
+    },
+    {
+      "id": "d2e4",
+      "title": "Ejercicio 4",
+      "text": "Press militar con mancuernas",
+      "detail": "3 series de 10 repeticiones.",
+      "zone": "Hombro",
+      "sets": 3,
+      "color": "#ffdfe0",
+      "howto": "Empuja las mancuernas hacia arriba sin arquear la espalda.",
+      "link": "https://eresfitness.com/press-militar-con-mancuernas-o-barra/",
+      "alternative": {
+        "title": "Press hombro con goma",
+        "text": "Empuje vertical con banda.",
+        "detail": "3 series de 12 repeticiones.",
+        "sets": 3,
+        "material": "Goma",
+        "howto": "Pisa la goma y empuja arriba manteniendo costillas cerradas.",
+        "link": ""
+      }
+    },
+    {
+      "id": "d2e5",
+      "title": "Ejercicio 5",
+      "text": "Curl de bíceps",
+      "detail": "3 series de 12 repeticiones.",
+      "zone": "Bíceps",
+      "sets": 3,
+      "color": "#ffe7f5",
+      "howto": "Pega los codos al cuerpo y baja lento.",
+      "link": "https://eresfitness.com/curl-de-biceps/",
+      "alternative": {
+        "title": "Curl con goma",
+        "text": "Flexión de codo con banda.",
+        "detail": "3 series de 15 repeticiones.",
+        "sets": 3,
+        "material": "Goma",
+        "howto": "Pisa la goma y flexiona codos pegados al costado.",
+        "link": ""
+      }
+    },
+    {
+      "id": "d2e6",
+      "title": "Ejercicio 6",
+      "text": "Plancha frontal",
+      "detail": "3 series de 30–45 seg.",
+      "zone": "Core",
+      "sets": 3,
+      "color": "#e6f0ff",
+      "howto": "Antebrazos en el suelo, glúteo apretado y cuerpo en línea recta.",
+      "link": "https://eresfitness.com/ejercicio-plancha/",
+      "alternative": {
+        "title": "Plancha con rodillas apoyadas",
+        "text": "Versión más accesible del core.",
+        "detail": "3 series de 30–40 seg.",
+        "sets": 3,
+        "material": "Peso corporal",
+        "howto": "Mantén hombros, cadera y rodillas alineados.",
+        "link": ""
+      }
+    },
+    {
+      "id": "d2e7",
+      "title": "Ejercicio 7",
+      "text": "Cardio (bici/elíptica)",
+      "detail": "15 min.",
+      "zone": "Cardio",
+      "sets": 3,
+      "color": "#fff0d9",
+      "howto": "Mantén un ritmo continuo y una respiración controlada.",
+      "link": "",
+      "alternative": {
+        "title": "Cardio en circuito",
+        "text": "Marcha, jumping jacks suaves o escalón.",
+        "detail": "15 minutos en bloques.",
+        "sets": 3,
+        "material": "Peso corporal",
+        "howto": "Alterna 45 segundos activos y 15 de descanso.",
+        "link": ""
+      }
     }
   ],
   "3": [
     {
       "id": "d3e1",
       "title": "Ejercicio 1",
-      "text": "Peso muerto rumano en barra guiada",
+      "text": "Peso muerto rumano guiado",
       "detail": "4 series de 10 repeticiones.",
       "zone": "Femoral y glúteo",
       "sets": 4,
@@ -289,7 +471,7 @@
       "id": "d3e2",
       "title": "Ejercicio 2",
       "text": "Zancadas caminando",
-      "detail": "3 series de 12 pasos por pierna.",
+      "detail": "3 series de 12 por pierna.",
       "zone": "Pierna y glúteo",
       "sets": 3,
       "color": "#ffe8c7",
@@ -303,6 +485,106 @@
         "material": "Peso corporal o mancuerna",
         "howto": "Mantén una base fija y baja en vertical con control.",
         "link": "https://eresfitness.com/zancadas/"
+      }
+    },
+    {
+      "id": "d3e3",
+      "title": "Ejercicio 3",
+      "text": "Curl femoral tumbado",
+      "detail": "3 series de 12 repeticiones.",
+      "zone": "Femoral",
+      "sets": 3,
+      "color": "#e9dcff",
+      "howto": "Flexiona rodillas acercando los talones a glúteos sin despegar la cadera.",
+      "link": "",
+      "alternative": {
+        "title": "Curl femoral con fitball o toalla",
+        "text": "Deslizamiento de talones.",
+        "detail": "3 series de 12 repeticiones.",
+        "sets": 3,
+        "material": "Peso corporal",
+        "howto": "Eleva cadera y acerca los talones a glúteos deslizando lento.",
+        "link": ""
+      }
+    },
+    {
+      "id": "d3e4",
+      "title": "Ejercicio 4",
+      "text": "Patada de glúteo en polea",
+      "detail": "3 series de 15 repeticiones.",
+      "zone": "Glúteo",
+      "sets": 3,
+      "color": "#ffdfe0",
+      "howto": "Lleva la pierna atrás sin arquear la espalda y vuelve con control.",
+      "link": "",
+      "alternative": {
+        "title": "Patada de glúteo en cuadrupedia",
+        "text": "Sin máquina.",
+        "detail": "3 series de 20 por pierna.",
+        "sets": 3,
+        "material": "Peso corporal o mini banda",
+        "howto": "A cuatro apoyos, empuja el pie hacia arriba manteniendo la cadera paralela al suelo.",
+        "link": ""
+      }
+    },
+    {
+      "id": "d3e5",
+      "title": "Ejercicio 5",
+      "text": "Sentadilla sumo",
+      "detail": "3 series de 12 repeticiones.",
+      "zone": "Pierna interna y glúteo",
+      "sets": 3,
+      "color": "#ffe7f5",
+      "howto": "Apertura amplia de pies y pecho alto durante todo el movimiento.",
+      "link": "",
+      "alternative": {
+        "title": "Sentadilla sumo con peso corporal",
+        "text": "Misma técnica sin carga.",
+        "detail": "3 series de 15 repeticiones.",
+        "sets": 3,
+        "material": "Peso corporal",
+        "howto": "Busca una amplitud cómoda y controla la bajada y la subida.",
+        "link": ""
+      }
+    },
+    {
+      "id": "d3e6",
+      "title": "Ejercicio 6",
+      "text": "Elevaciones de piernas",
+      "detail": "3 series de 12–15 repeticiones.",
+      "zone": "Abdomen",
+      "sets": 3,
+      "color": "#e6f0ff",
+      "howto": "Pega la zona lumbar al suelo y eleva las piernas sin despegarla.",
+      "link": "",
+      "alternative": {
+        "title": "Dead bug",
+        "text": "Trabajo de core más controlado.",
+        "detail": "3 series de 10 por lado.",
+        "sets": 3,
+        "material": "Peso corporal",
+        "howto": "Extiende brazo y pierna contraria manteniendo la lumbar estable.",
+        "link": ""
+      }
+    },
+    {
+      "id": "d3e7",
+      "title": "Ejercicio 7",
+      "text": "Cinta inclinada",
+      "detail": "12 min.",
+      "zone": "Cardio",
+      "sets": 3,
+      "color": "#fff0d9",
+      "howto": "Camina con zancada firme y sin agarrarte a la máquina.",
+      "link": "",
+      "alternative": {
+        "title": "Subidas a escalón",
+        "text": "Cardio sin cinta.",
+        "detail": "12 minutos continuos.",
+        "sets": 3,
+        "material": "Peso corporal",
+        "howto": "Sube y baja de un escalón a ritmo constante alternando pierna dominante.",
+        "link": ""
       }
     }
   ],
@@ -331,7 +613,7 @@
       "id": "d4e2",
       "title": "Ejercicio 2",
       "text": "Remo con mancuerna",
-      "detail": "3 series de 12 por lado.",
+      "detail": "3 series de 12 repeticiones.",
       "zone": "Espalda",
       "sets": 3,
       "color": "#ffe8c7",
@@ -346,81 +628,132 @@
         "howto": "Ancla la goma al frente y tira hacia el abdomen.",
         "link": "https://eresfitness.com/remo-sentado-en-polea-baja/"
       }
+    },
+    {
+      "id": "d4e3",
+      "title": "Ejercicio 3",
+      "text": "Elevaciones laterales",
+      "detail": "3 series de 15 repeticiones.",
+      "zone": "Hombro",
+      "sets": 3,
+      "color": "#e9dcff",
+      "howto": "Eleva los brazos hasta la altura del hombro sin encoger el cuello.",
+      "link": "",
+      "alternative": {
+        "title": "Elevación lateral con goma",
+        "text": "Versión con banda.",
+        "detail": "3 series de 15 repeticiones.",
+        "sets": 3,
+        "material": "Goma",
+        "howto": "Pisa la goma y separa los brazos lateralmente manteniendo hombros bajos.",
+        "link": ""
+      }
+    },
+    {
+      "id": "d4e4",
+      "title": "Ejercicio 4",
+      "text": "Tríceps (fondos o polea)",
+      "detail": "3 series de 12 repeticiones.",
+      "zone": "Tríceps",
+      "sets": 3,
+      "color": "#ffdfe0",
+      "howto": "Codos pegados al cuerpo y recorrido controlado.",
+      "link": "",
+      "alternative": {
+        "title": "Extensión de tríceps con goma",
+        "text": "Empuje hacia abajo con banda.",
+        "detail": "3 series de 15 repeticiones.",
+        "sets": 3,
+        "material": "Goma",
+        "howto": "Extiende codos manteniéndolos cerca del torso.",
+        "link": ""
+      }
+    },
+    {
+      "id": "d4e5",
+      "title": "Ejercicio 5",
+      "text": "Step-up con mancuerna",
+      "detail": "3 series de 12 por pierna.",
+      "zone": "Pierna y glúteo",
+      "sets": 3,
+      "color": "#ffe7f5",
+      "howto": "Sube a un cajón con control y baja lento.",
+      "link": "",
+      "alternative": {
+        "title": "Step-up sin carga",
+        "text": "Versión con peso corporal.",
+        "detail": "3 series de 15 por pierna.",
+        "sets": 3,
+        "material": "Peso corporal",
+        "howto": "Apoya todo el pie arriba y busca una subida estable y vertical.",
+        "link": ""
+      }
+    },
+    {
+      "id": "d4e6",
+      "title": "Ejercicio 6",
+      "text": "Russian twist",
+      "detail": "3 series de 20 repeticiones.",
+      "zone": "Abdomen",
+      "sets": 3,
+      "color": "#e6f0ff",
+      "howto": "Gira de lado a lado sin perder la postura del tronco.",
+      "link": "",
+      "alternative": {
+        "title": "Giros de tronco sin peso",
+        "text": "Versión más suave.",
+        "detail": "3 series de 20 giros.",
+        "sets": 3,
+        "material": "Peso corporal",
+        "howto": "Misma mecánica, pero con pies apoyados y menor inclinación.",
+        "link": ""
+      }
+    },
+    {
+      "id": "d4e7",
+      "title": "Ejercicio 7",
+      "text": "Cardio",
+      "detail": "15 min.",
+      "zone": "Cardio",
+      "sets": 3,
+      "color": "#fff0d9",
+      "howto": "Mantén un ritmo constante y una resistencia moderada.",
+      "link": "",
+      "alternative": {
+        "title": "Cardio combinado en casa",
+        "text": "Marcha, jumping jacks y escalón.",
+        "detail": "15 minutos en circuito.",
+        "sets": 3,
+        "material": "Peso corporal",
+        "howto": "Alterna 1 minuto de marcha rápida, 1 minuto de jumping jacks suaves y 1 minuto de escalón.",
+        "link": ""
+      }
     }
   ]
 }
 </script>
 
 <script>
-const STORAGE_KEY='rutina_ana_registros_editable_v3';
-const ROUTINE_STORAGE_KEY='rutina_ana_datos_editables_v3';
+const STORAGE_KEY='rutina_ana_registros_editable_v4';
+const ROUTINE_STORAGE_KEY='rutina_ana_datos_editables_v4';
 const DEFAULT_ROUTINE_DATA=JSON.parse(document.getElementById('initial-data').textContent);
 const appState={historyStack:['screen-home'],currentDay:null,currentExerciseId:null,currentRows:[],currentSource:'rutina',currentExercise:null,currentWebUrl:''};
 let routineData=loadRoutineData();
 
-function loadRoutineData(){
-  try {
-    return JSON.parse(localStorage.getItem(ROUTINE_STORAGE_KEY)||'null') || JSON.parse(JSON.stringify(DEFAULT_ROUTINE_DATA));
-  } catch(e) {
-    return JSON.parse(JSON.stringify(DEFAULT_ROUTINE_DATA));
-  }
-}
+function loadRoutineData(){ try { return JSON.parse(localStorage.getItem(ROUTINE_STORAGE_KEY)||'null') || JSON.parse(JSON.stringify(DEFAULT_ROUTINE_DATA)); } catch(e) { return JSON.parse(JSON.stringify(DEFAULT_ROUTINE_DATA)); } }
 function persistRoutineData(){ localStorage.setItem(ROUTINE_STORAGE_KEY, JSON.stringify(routineData)); }
 function escapeHtml(t){ return String(t).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'","&#039;"); }
 function escapeAttr(t){ return escapeHtml(t).replaceAll('`','&#096;'); }
 function escapeJs(t){ return String(t).replaceAll('\\','\\\\').replaceAll("'","\\'"); }
 function svgToDataUri(svg){ return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg); }
-function getExerciseImageSvg(title,text,color){
-  return "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 450'><rect width='800' height='450' rx='30' fill='"+color+"'/><text x='60' y='140' font-size='38' font-family='Arial' font-weight='700' fill='#7b3258'>"+escapeHtml(title)+"</text><text x='60' y='210' font-size='28' font-family='Arial' fill='#5c3047'>"+escapeHtml(text)+"</text></svg>";
-}
-function showScreen(id){
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  if(!appState.historyStack.length || appState.historyStack[appState.historyStack.length-1]!==id){
-    appState.historyStack.push(id);
-  }
-}
-function goHome(){
-  appState.historyStack=['screen-home'];
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById('screen-home').classList.add('active');
-}
-function goBack(){
-  if(appState.historyStack.length>1){
-    appState.historyStack.pop();
-    const prev=appState.historyStack[appState.historyStack.length-1];
-    document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-    document.getElementById(prev).classList.add('active');
-  } else {
-    goHome();
-  }
-}
-function openDay(day){
-  appState.currentDay=day;
-  document.getElementById('day-title').textContent='Día '+day;
-  renderExercises(day);
-  showScreen('screen-day-detail');
-}
-function openWebView(url,title){
-  appState.currentWebUrl = url || '';
-  document.getElementById('webview-title').textContent = title || 'Ejercicio';
-  const frame = document.getElementById('webview-frame');
-  frame.src = url || 'about:blank';
-  showScreen('screen-webview');
-  setTimeout(function(){
-    try {
-      const current = frame.contentWindow.location.href;
-      if (!current || current === 'about:blank') {
-        window.open(url, '_blank');
-      }
-    } catch(e) {
-      // Si la web bloquea iframe, el usuario tiene botón para abrir fuera.
-    }
-  }, 1200);
-}
-function openExternalCurrent(){
-  if(appState.currentWebUrl) window.open(appState.currentWebUrl, '_blank');
-}
+function getExerciseImageSvg(title,text,color){ return "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 450'><rect width='800' height='450' rx='30' fill='"+color+"'/><text x='60' y='140' font-size='38' font-family='Arial' font-weight='700' fill='#7b3258'>"+escapeHtml(title)+"</text><text x='60' y='210' font-size='28' font-family='Arial' fill='#5c3047'>"+escapeHtml(text)+"</text></svg>"; }
+function showScreen(id){ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active')); document.getElementById(id).classList.add('active'); if(!appState.historyStack.length || appState.historyStack[appState.historyStack.length-1]!==id) appState.historyStack.push(id); }
+function goHome(){ appState.historyStack=['screen-home']; document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active')); document.getElementById('screen-home').classList.add('active'); }
+function goBack(){ if(appState.historyStack.length>1){ appState.historyStack.pop(); const prev=appState.historyStack[appState.historyStack.length-1]; document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active')); document.getElementById(prev).classList.add('active'); } else goHome(); }
+function openDay(day){ appState.currentDay=day; document.getElementById('day-title').textContent='Día '+day; renderExercises(day); showScreen('screen-day-detail'); }
+function openWebView(url,title){ if(!url) return; appState.currentWebUrl=url; document.getElementById('webview-title').textContent=title||'Ejercicio'; document.getElementById('webview-frame').src=url; showScreen('screen-webview'); }
+function openExternalCurrent(){ if(appState.currentWebUrl) window.open(appState.currentWebUrl, '_blank'); }
+
 function renderExercises(day){
   const list=document.getElementById('exercise-list');
   const items=routineData[String(day)]||[];
@@ -434,53 +767,40 @@ function renderExercises(day){
     html += '<div class="exercise-meta">'+escapeHtml(ex.detail||'')+'</div>';
     html += '<div class="howto"><strong>Cómo hacerlo</strong><br>'+escapeHtml(ex.howto||'')+'</div>';
     html += '<img class="exercise-image" alt="'+escapeHtml(ex.title)+'" src="'+svgToDataUri(getExerciseImageSvg(ex.title,ex.text,ex.color||'#ffd8ea'))+'">';
-    html += '<button class="secondary-btn" onclick="openRegistro('+day+', \''
-      +escapeJs(ex.id)+'\')">Registrar</button>';
+    html += '<button class="secondary-btn" onclick="openRegistro('+day+', ''+escapeJs(ex.id)+'')">Registrar</button>';
     if(ex.link){
       html += '<div style="height:10px"></div>';
-      html += '<button class="light-btn" onclick="openWebView(\''+escapeJs(ex.link)+'\', \''
-        +escapeJs(ex.text || ex.title)+'\')">Ver ejercicio</button>';
+      html += '<button class="light-btn" onclick="openWebView(''+escapeJs(ex.link)+'', ''+escapeJs(ex.text||ex.title)+'')">Ver ejercicio</button>';
     }
     html += '<div style="height:10px"></div>';
-    html += '<button class="alt-btn" onclick="openAlternativeRegistro('+day+', \''
-      +escapeJs(ex.id)+'\')">Ejercicio alternativo</button>';
+    html += '<button class="alt-btn" onclick="openAlternativeRegistro('+day+', ''+escapeJs(ex.id)+'')">Ejercicio alternativo</button>';
     if(ex.alternative && ex.alternative.link){
       html += '<div style="height:10px"></div>';
-      html += '<button class="light-btn" onclick="openWebView(\''+escapeJs(ex.alternative.link)+'\', \''
-        +escapeJs(ex.alternative.title)+'\')">Ver alternativo</button>';
+      html += '<button class="light-btn" onclick="openWebView(''+escapeJs(ex.alternative.link)+'', ''+escapeJs(ex.alternative.title)+'')">Ver alternativo</button>';
     }
     html += '</div>';
   });
   list.innerHTML = html || '<div class="empty-box">No hay ejercicios en este día.</div>';
 }
-function createEmptyRow(label,sets){
-  return {dia:label,serie1:'',serie2:'',serie3:'',serie4:sets===4?'':undefined};
-}
+
+function createEmptyRow(label,sets){ return {dia:label,serie1:'',serie2:'',serie3:'',serie4:sets===4?'':undefined}; }
 function openRegistro(day,id){
-  const ex=(routineData[String(day)]||[]).find(x=>x.id===id);
-  if(!ex) return;
+  const ex=(routineData[String(day)]||[]).find(x=>x.id===id); if(!ex) return;
   appState.currentDay=day; appState.currentExerciseId=id; appState.currentSource='rutina'; appState.currentExercise=ex;
   const rec=getSavedRecords().find(r=>r.exerciseId===id && r.source==='rutina');
   appState.currentRows = rec ? JSON.parse(JSON.stringify(rec.rows)) : [createEmptyRow('Día '+day, Number(ex.sets||3))];
-  renderRegistroTable(Number(ex.sets||3));
-  document.getElementById('popupTitle').textContent='Registrar '+ex.title;
-  document.getElementById('registroPopup').classList.add('active');
+  renderRegistroTable(Number(ex.sets||3)); document.getElementById('popupTitle').textContent='Registrar '+ex.title; document.getElementById('registroPopup').classList.add('active');
 }
 function openAlternativeRegistro(day,id){
-  const base=(routineData[String(day)]||[]).find(x=>x.id===id);
-  const ex=base && base.alternative ? base.alternative : null;
-  if(!ex) return;
+  const base=(routineData[String(day)]||[]).find(x=>x.id===id); const ex=base && base.alternative ? base.alternative : null; if(!ex) return;
   appState.currentDay=day; appState.currentExerciseId=id+'_alt'; appState.currentSource='alternativo'; appState.currentExercise=ex;
   const rec=getSavedRecords().find(r=>r.exerciseId===appState.currentExerciseId && r.source==='alternativo');
   appState.currentRows = rec ? JSON.parse(JSON.stringify(rec.rows)) : [createEmptyRow('Día '+day+' alternativo', Number(ex.sets||3))];
-  renderRegistroTable(Number(ex.sets||3));
-  document.getElementById('popupTitle').textContent='Registrar alternativo · '+ex.title;
-  document.getElementById('registroPopup').classList.add('active');
+  renderRegistroTable(Number(ex.sets||3)); document.getElementById('popupTitle').textContent='Registrar alternativo · '+ex.title; document.getElementById('registroPopup').classList.add('active');
 }
 function renderRegistroTable(sets){
   document.getElementById('registroHeadRow').innerHTML='<th>Dia</th><th>Serie 1</th><th>Serie 2</th><th>Serie 3</th>'+(sets===4?'<th>Serie 4</th>':'');
-  const tbody=document.querySelector('#registroTable tbody');
-  tbody.innerHTML='';
+  const tbody=document.querySelector('#registroTable tbody'); tbody.innerHTML='';
   appState.currentRows.forEach((row,i)=>{
     const tr=document.createElement('tr');
     tr.innerHTML='<td><input type="text" value="'+escapeAttr(row.dia||'')+'" data-index="'+i+'" data-field="dia"></td>'
@@ -493,20 +813,16 @@ function renderRegistroTable(sets){
   tbody.querySelectorAll('input').forEach(inp=>inp.addEventListener('input', handleTableInput));
 }
 function handleTableInput(e){
-  const inp=e.target;
-  const index=Number(inp.dataset.index);
-  const field=inp.dataset.field;
-  const sets=Number(appState.currentExercise.sets||3);
+  const inp=e.target, index=Number(inp.dataset.index), field=inp.dataset.field, sets=Number(appState.currentExercise.sets||3);
   appState.currentRows[index][field]=inp.value;
   const lastField=sets===4?'serie4':'serie3';
   if(field===lastField && index===appState.currentRows.length-1 && inp.value.trim()!==''){
     const label=appState.currentSource==='alternativo' ? ('Día '+appState.currentDay+' alternativo') : ('Día '+appState.currentDay);
-    appState.currentRows.push(createEmptyRow(label, sets));
-    renderRegistroTable(sets);
+    appState.currentRows.push(createEmptyRow(label, sets)); renderRegistroTable(sets);
   }
 }
 function closePopup(){ document.getElementById('registroPopup').classList.remove('active'); }
-function getSavedRecords(){ try{ return JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]'); }catch(e){ return []; } }
+function getSavedRecords(){ try{ return JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]'); } catch(e){ return []; } }
 function saveCurrentRecord(){
   const sets=Number(appState.currentExercise && appState.currentExercise.sets ? appState.currentExercise.sets : 3);
   const rows=appState.currentRows.filter(r => (r.dia||'').trim() || (r.serie1||'').trim() || (r.serie2||'').trim() || (r.serie3||'').trim() || (r.serie4||'').trim());
@@ -515,38 +831,27 @@ function saveCurrentRecord(){
   const idx=all.findIndex(r => r.exerciseId===rec.exerciseId && r.source===rec.source);
   if(idx>=0) all[idx]=rec; else all.push(rec);
   localStorage.setItem(STORAGE_KEY, JSON.stringify(all));
-  closePopup();
-  alert('Registro guardado correctamente');
+  closePopup(); alert('Registro guardado correctamente');
 }
 function renderHistory(){
-  const list=document.getElementById('history-list');
-  const all=getSavedRecords();
+  const list=document.getElementById('history-list'), all=getSavedRecords();
   if(!all.length){ list.innerHTML='<div class="empty-box">Aún no hay datos guardados.</div>'; return; }
   const grouped={};
-  all.forEach(r=>{
-    const key=r.source==='alternativo' ? ('Día '+r.day+' · Alternativo') : ('Día '+r.day);
-    if(!grouped[key]) grouped[key]=[];
-    grouped[key].push(r);
-  });
+  all.forEach(r=>{ const key=r.source==='alternativo' ? ('Día '+r.day+' · Alternativo') : ('Día '+r.day); if(!grouped[key]) grouped[key]=[]; grouped[key].push(r); });
   let html='';
   Object.keys(grouped).sort((a,b)=>a.localeCompare(b,'es')).forEach(key=>{
     html+='<div class="card"><h3>'+escapeHtml(key)+'</h3>';
     grouped[key].forEach(r=>{
       html+='<div class="history-card"><strong>'+escapeHtml(r.exerciseTitle)+'</strong><div class="exercise-meta">'+escapeHtml(r.exerciseText)+' · '+r.sets+' series · Última actualización '+escapeHtml(r.updatedAt)+'</div><table><thead><tr><th>Dia</th><th>Serie 1</th><th>Serie 2</th><th>Serie 3</th>'+(r.sets===4?'<th>Serie 4</th>':'')+'</tr></thead><tbody>';
-      r.rows.forEach(row=>{
-        html+='<tr><td>'+escapeHtml(row.dia||'')+'</td><td>'+escapeHtml(row.serie1||'')+'</td><td>'+escapeHtml(row.serie2||'')+'</td><td>'+escapeHtml(row.serie3||'')+'</td>'+(r.sets===4?'<td>'+escapeHtml(row.serie4||'')+'</td>':'')+'</tr>';
-      });
+      r.rows.forEach(row=>{ html+='<tr><td>'+escapeHtml(row.dia||'')+'</td><td>'+escapeHtml(row.serie1||'')+'</td><td>'+escapeHtml(row.serie2||'')+'</td><td>'+escapeHtml(row.serie3||'')+'</td>'+(r.sets===4?'<td>'+escapeHtml(row.serie4||'')+'</td>':'')+'</tr>'; });
       html+='</tbody></table></div>';
     });
     html+='</div>';
   });
   list.innerHTML=html;
 }
-function openEditor(){
-  document.getElementById('editorDaySelect').value='1';
-  renderEditor(1);
-  showScreen('screen-editor');
-}
+
+function openEditor(){ document.getElementById('editorDaySelect').value='1'; renderEditor(1); showScreen('screen-editor'); }
 function editorInput(label,fieldPath,day,index,value,type){
   const v=value==null?'':String(value);
   const control=type==='textarea'
@@ -555,9 +860,7 @@ function editorInput(label,fieldPath,day,index,value,type){
   return '<div class="field"><label>'+escapeHtml(label)+'</label>'+control+'</div>';
 }
 function renderEditor(day){
-  const items=routineData[String(day)]||[];
-  const list=document.getElementById('editor-list');
-  let html='';
+  const items=routineData[String(day)]||[], list=document.getElementById('editor-list'); let html='';
   items.forEach((ex,index)=>{
     html+='<div class="editor-block"><h3>'+escapeHtml(ex.title)+'</h3>'
       +editorInput('Título visible','title',day,index,ex.title)
@@ -566,6 +869,7 @@ function renderEditor(day){
       +editorInput('Zona','zone',day,index,ex.zone)
       +editorInput('Series','sets',day,index,ex.sets,'number')
       +editorInput('Explicación','howto',day,index,ex.howto,'textarea')
+      +editorInput('Color','color',day,index,ex.color||'')
       +editorInput('Link ejercicio','link',day,index,ex.link||'')
       +'<div class="howto"><strong>Alternativo</strong></div>'
       +editorInput('Título alternativo','alternative.title',day,index,ex.alternative && ex.alternative.title || '')
@@ -575,21 +879,15 @@ function renderEditor(day){
       +editorInput('Series alternativo','alternative.sets',day,index,ex.alternative && ex.alternative.sets || 3,'number')
       +editorInput('Explicación alternativo','alternative.howto',day,index,ex.alternative && ex.alternative.howto || '','textarea')
       +editorInput('Link alternativo','alternative.link',day,index,ex.alternative && ex.alternative.link || '')
+      +'<button class="danger-btn" onclick="removeExercise('+day+', '+index+')">Eliminar este ejercicio</button>'
       +'</div>';
   });
   list.innerHTML=html || '<div class="empty-box">No hay ejercicios para editar en este día.</div>';
 }
-function setNestedValue(obj,path,value){
-  const parts=path.split('.');
-  let cur=obj;
-  for(let i=0;i<parts.length-1;i++){ if(!cur[parts[i]]) cur[parts[i]]={}; cur=cur[parts[i]]; }
-  cur[parts[parts.length-1]]=value;
-}
+function setNestedValue(obj,path,value){ const parts=path.split('.'); let cur=obj; for(let i=0;i<parts.length-1;i++){ if(!cur[parts[i]]) cur[parts[i]]={}; cur=cur[parts[i]]; } cur[parts[parts.length-1]]=value; }
 function saveRoutineEdits(){
   document.querySelectorAll('#editor-list input, #editor-list textarea').forEach(el=>{
-    const day=String(el.dataset.day);
-    const index=Number(el.dataset.index);
-    const field=el.dataset.field;
+    const day=String(el.dataset.day), index=Number(el.dataset.index), field=el.dataset.field;
     const value=el.type==='number' ? Number(el.value||0) : el.value;
     setNestedValue(routineData[day][index], field, value);
   });
@@ -597,11 +895,35 @@ function saveRoutineEdits(){
   if(appState.currentDay) renderExercises(appState.currentDay);
   alert('Cambios de rutina guardados correctamente');
 }
+function addExerciseToDay(){
+  const day=String(document.getElementById('editorDaySelect').value);
+  const nextNum=(routineData[day]||[]).length+1;
+  routineData[day].push({
+    id:'d'+day+'e'+nextNum+'_'+Date.now(),
+    title:'Ejercicio '+nextNum,
+    text:'Nuevo ejercicio',
+    detail:'3 series de 12 repeticiones.',
+    zone:'Sin definir',
+    sets:3,
+    color:'#ffd8ea',
+    howto:'Explicación pendiente.',
+    link:'',
+    alternative:{title:'Alternativo '+nextNum,text:'Nuevo alternativo',detail:'3 series de 12 repeticiones.',sets:3,material:'Sin definir',howto:'Explicación alternativa pendiente.',link:''}
+  });
+  persistRoutineData(); renderEditor(Number(day));
+}
+function removeExercise(day,index){
+  const key=String(day);
+  if(!confirm('¿Eliminar este ejercicio?')) return;
+  routineData[key].splice(index,1);
+  persistRoutineData(); renderEditor(Number(day));
+}
 function resetRoutineData(){
   if(!confirm('Se restaurará la rutina original. ¿Continuar?')) return;
   routineData=JSON.parse(JSON.stringify(DEFAULT_ROUTINE_DATA));
   persistRoutineData();
   renderEditor(Number(document.getElementById('editorDaySelect').value||1));
+  if(appState.currentDay) renderExercises(appState.currentDay);
   alert('Rutina original restaurada');
 }
 </script>
